@@ -39,7 +39,7 @@ GetPosition:Get-Position rdf:type owl:NamedIndividual ,
 							CaSk:ProvidedCapability ;
 					VDI3682:hasOutput GetPosition:Get-Position_Out_Position ;
 					CSS:isRestrictedBy GetPosition:Get-Position_Constraint_X ,
-							Get-Position:Get-Position_Constraint_Y
+							GetPosition:Get-Position_Constraint_Y ;
 					CSS:requiresCapability GetPosition:Get-Position .
 
 
@@ -67,7 +67,7 @@ GetPosition:Get-Position_Constraint_Y rdf:type owl:NamedIndividual ,
 GetPosition:Get-Position_Out_Position rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
 					VDI3682:isCharacterizedBy GetPosition:Get-Position_Out_Position_X_ID ,
-							Get-Position:Get-Position_Out_Position_Y_ID .
+							GetPosition:Get-Position_Out_Position_Y_ID .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position_X_ID
@@ -95,7 +95,7 @@ GetPosition:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
 							CSS:Resource ;
 					CSS:providesCapability GetPosition:Get-Position ;
 					DINEN61360:has_Data_Element GetPosition:Neobotix-MMO-700_Position_X_DE ,
-							DINEN61360:has_Data_Element Get-Position:Neobotix-MMO-700_Position_Y_DE ;
+							GetPosition:Neobotix-MMO-700_Position_Y_DE ;
 					VDI3682:isCharacterizedBy GetPosition:Neobotix-MMO-700_Position_X_ID ,
 							GetPosition:Neobotix-MMO-700_Position_Y_ID .
 					
