@@ -3,11 +3,12 @@ import getpass
 from langchain_openai import OpenAIEmbeddings
 from langchain.chat_models import init_chat_model
 from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
 from langchain.schema import Document
 from langchain.prompts import ChatPromptTemplate
-from langchain import hub
+from dotenv import load_dotenv
 
+
+load_dotenv()
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter OpenAI API key: ")
 
@@ -27,7 +28,7 @@ print(f"split ros2 information into {len(chunks)} chunks")
 llm = init_chat_model('gpt-4', model_provider='openai')
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 
-# Falls chunks eine Liste von Strings ist, konvertiere sie in Document-Objekte
+# If chunks is a list of strings, convert them to document objects
 documents = [Document(page_content=text) for text in chunks]
 
 # 4. Create vectorstore (Chroma) from the documents
