@@ -20,14 +20,14 @@
 #################################################################
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Distance
-MoveForward:Distance rdf:type owl:NamedIndividual ,
+MoveForward:Distance_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the length of any object or distance in meters." .
 					
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Time
-MoveForward:Time rdf:type owl:NamedIndividual ,
+MoveForward:Time_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "s" ;
 					DINEN61360:Definition "This type specifies the time of any process in seconds." .
@@ -77,7 +77,7 @@ MoveForward:Move-Forward_Input_Distance rdf:type owl:NamedIndividual ,
 MoveForward:Move-Forward_Input_Distance_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
 					DINEN61360:has_Instance_Description MoveForward:Move-Forward_Input_Distance_ID ;
-					DINEN61360:has_Type_Description MoveForward:Distance .
+					DINEN61360:has_Type_Description MoveForward:Distance_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Move-Forward_Input_Distance_ID
@@ -100,7 +100,7 @@ MoveForward:Move-Forward_Input_Time rdf:type owl:NamedIndividual ,
 MoveForward:Move-Forward_Input_Time_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
 					DINEN61360:has_Instance_Description MoveForward:Move-Forward_Input_Time_ID ;
-					DINEN61360:has_Type_Description MoveForward:Time .
+					DINEN61360:has_Type_Description MoveForward:Time_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Move-Forward_Input_Time_ID
@@ -123,7 +123,7 @@ MoveForward:Move-Forward_Output_Distance rdf:type owl:NamedIndividual ,
 MoveForward:Move-Forward_Output_Distance_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
 					DINEN61360:has_Instance_Description MoveForward:Move-Forward_Output_Distance_ID ;
-					DINEN61360:has_Type_Description MoveForward:Distance .
+					DINEN61360:has_Type_Description MoveForward:Distance_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Move-Forward_Output_Distance_ID
@@ -147,7 +147,7 @@ MoveForward:Move-Forward_Output_Time rdf:type owl:NamedIndividual ,
 MoveForward:Move-Forward_Output_Time_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
 					DINEN61360:has_Instance_Description MoveForward:Move-Forward_Output_Time_ID ;
-					DINEN61360:has_Type_Description MoveForward:Time .
+					DINEN61360:has_Type_Description MoveForward:Time_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Move-Forward_Output_Time_ID

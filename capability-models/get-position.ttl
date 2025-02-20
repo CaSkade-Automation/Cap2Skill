@@ -20,14 +20,14 @@
 #################################################################
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_X
-GetPosition:Position_X rdf:type owl:NamedIndividual ,
+GetPosition:Position_X_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_Y
-GetPosition:Position_X rdf:type owl:NamedIndividual ,
+GetPosition:Position_Y_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the y coordinate in meters." .
@@ -105,7 +105,7 @@ GetPosition:Neobotix-MMO-700_Position_X_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
                      DINEN61360:has_Instance_Description GetPosition:Neobotix-MMO-700_Position_X_ID ,
 							GetPosition:Get-Position_Out_Position_X_ID ;
-                     DINEN61360:has_Type_Description GetPosition:Position_X .
+                     DINEN61360:has_Type_Description GetPosition:Position_X_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_X_ID
@@ -123,7 +123,7 @@ GetPosition:Neobotix-MMO-700_Position_Y_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
                      DINEN61360:has_Instance_Description GetPosition:Neobotix-MMO-700_Position_Y_ID ,
 							GetPosition:Get-Position_Out_Position_Y_ID ;
-                     DINEN61360:has_Type_Description GetPosition:Position_Y .
+                     DINEN61360:has_Type_Description GetPosition:Position_Y_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_Y_ID

@@ -20,7 +20,7 @@
 #################################################################
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Velocity
-SetVelocity:Velocity rdf:type owl:NamedIndividual ,
+SetVelocity:Velocity_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m/s" ;
 					DINEN61360:Definition "This type specifies the velocity of any mobile resource in meters per second." .
@@ -57,7 +57,7 @@ SetVelocity:Set-Velocity_Input rdf:type owl:NamedIndividual ,
 SetVelocity:Set-Velocity_Input_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
 					DINEN61360:has_Instance_Description SetVelocity:Set-Velocity_Input_ID ;
-					DINEN61360:has_Type_Description SetVelocity:Velocity .
+					DINEN61360:has_Type_Description SetVelocity:Velocity_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Set-Velocity_Input_ID
@@ -97,7 +97,7 @@ SetVelocity:Neobotix-MMO-700_Velocity_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
                      DINEN61360:has_Instance_Description SetVelocity:Neobotix-MMO-700_Velocity_ID ,
 							SetVelocity:Set-Velocity_Output_ID ;
-                     DINEN61360:has_Type_Description SetVelocity:Velocity .
+                     DINEN61360:has_Type_Description SetVelocity:Velocity_TD .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Neobotix-MMO-700_Velocity_ID
