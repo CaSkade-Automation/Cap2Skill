@@ -1,0 +1,10 @@
+--- Instruction ---
+Create an executable {framework} implementation in {language} for the following input capability. 
+
+--- Context ---
+${control_options}
+
+--- Input Data ---
+${capability}
+
+--- Output --- 

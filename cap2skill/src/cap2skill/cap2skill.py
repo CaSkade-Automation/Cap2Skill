@@ -7,6 +7,9 @@ from langchain.schema import Document
 from langchain.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 
+def load_file(file_path): 
+    with open(file_path, "r") as f:
+        return f.read()
 
 load_dotenv()
 if not os.environ.get("OPENAI_API_KEY"):
@@ -17,8 +20,7 @@ base_dir = os.path.dirname(os.path.dirname(__file__))
 doc_path = os.path.join(base_dir, "../docs", "ros2_system_report.md")
 
 # 1. Load document
-with open(doc_path, "r") as f:
-    document_text = f.read()
+document_text = load_file(doc_path)
 
 # 2. Split document into manageable chunks
 chunks = document_text.split("**/")
@@ -38,21 +40,25 @@ vector_store = Chroma.from_documents(documents, embeddings)
 language = "Python"
 framework = "ROS2"
 resource_type = "mobile robots"
-system_template = "You are a programming expert in {language} with {framework} specializing in the automatic generation of executable code for {resource_type}. Transfer a description of a capability, available as an OWL ontology in Turtle syntax, into executable {language} {framework} code based on the control options from the context description.\n\nContext: {context}"
+
+system_prompt_template_path = os.path.join(base_dir, "../prompt-templates", "system_prompt.txt")
+system_prompt_template = load_file(system_prompt_template_path)
+
+user_prompt_template_path = os.path.join(base_dir, "../prompt-templates", "user_prompt.txt")
+user_prompt_template = load_file(user_prompt_template_path)
+
 prompt_template = ChatPromptTemplate.from_messages(
-    [("system", system_template), ('user', "{ontology}")]
+    [("system", system_prompt_template), ('user', user_prompt_template)]
 )
 
 ontology_path = os.path.join(base_dir, "../../capability-models", "set-velocity.ttl")
-with open(ontology_path, "r") as f:
-    ontology = f.read()
+ontology = load_file(ontology_path)
 
 
 query = f"Generate {language} {framework} code from an OWL ontology in Turtle syntax for a {resource_type}.  {ontology}"
 retrieved_docs = vector_store.similarity_search(query)
 docs_content = "\n\n".join(doc.page_content for doc in retrieved_docs)
-prompt = prompt_template.invoke({"language": language, "framework": framework, "resource_type": resource_type, "context": docs_content, "ontology": ontology})
-# prompt = prompt.invoke({"question": question, "context": docs_content})
+prompt = prompt_template.invoke({"language": language, "framework": framework, "resource_type": resource_type, "control_options": docs_content, "capability": ontology})
 answer = llm.invoke(prompt)
 
 print(answer)
