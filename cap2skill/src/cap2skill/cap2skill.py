@@ -5,60 +5,79 @@ from langchain.chat_models import init_chat_model
 from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
 from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompt_values import PromptValue
+from langchain_core.messages import BaseMessage
 from dotenv import load_dotenv
 
 def load_file(file_path): 
-    with open(file_path, "r") as f:
-        return f.read()
+        with open(file_path, "r") as f:
+            return f.read()
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+def load_prompt_template() -> ChatPromptTemplate:
+    system_prompt_template_path = os.path.join(BASE_DIR, "../prompt-templates", "system_prompt.txt")
+    system_prompt_template = load_file(system_prompt_template_path)
+
+    user_prompt_template_path = os.path.join(BASE_DIR, "../prompt-templates", "user_prompt.txt")
+    user_prompt_template = load_file(user_prompt_template_path)
+
+    prompt_template = ChatPromptTemplate.from_messages(
+        [("system", system_prompt_template), ('user', user_prompt_template)]
+    )
+    return prompt_template
 
 load_dotenv()
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter OpenAI API key: ")
 
-# 0. Path to Markdown file
-base_dir = os.path.dirname(os.path.dirname(__file__))
-doc_path = os.path.join(base_dir, "../docs", "ros2_system_report.md")
 
-# 1. Load document
-document_text = load_file(doc_path)
+class Cap2Skill:
+    """ Class for processing prompts and communicating with LLM. """
 
-# 2. Split document into manageable chunks
-chunks = document_text.split("**/")
-print(f"split ros2 information into {len(chunks)} chunks")
+    def __init__(self, programming_language: str, framework: str, resource_type: str, context: str, ontology: str):
+        self.llm = init_chat_model('gpt-4', model_provider='openai')
+        self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+        self.programming_language = programming_language
+        self.framework = framework
+        self.resource_type = resource_type
+        self.ontology = ontology
+        self.context = context
+        self.vector_store = None
+        self.prompt_template = load_prompt_template()
 
-# 3. Create embeddings for the document chunks
-llm = init_chat_model('gpt-4', model_provider='openai')
-embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+    def generate_chunks_from_context(self) -> list[Document]:
+        """ Split context into manageable chunks. """
+        chunks = self.context.split("**/")
+        print(f"split ros2 information into {len(chunks)} chunks")
+        
+        # If chunks is a list of strings, convert them to document objects
+        chunk_documents = [Document(page_content=text) for text in chunks]
+        return chunk_documents 
+    
+    def set_vector_store(self, chunk_documents: list[Document]):
+        """ Set the vector store for the chat model. """
+        self.vector_store = Chroma.from_documents(chunk_documents, self.embeddings)
+        
+    
+    def retrieve_relevant_context(self) -> str: 
+        """ Retrieve relevant context for the given capability ontology. """
+        query = f"Generate {self.programming_language} {self.framework} code from an OWL ontology in Turtle syntax for a {self.resource_type}.  {self.ontology}"
+        retrieved_contexts = self.vector_store.similarity_search(query)
+        retrieved_context_string = "\n\n".join(retrieved_context.page_content for retrieved_context in retrieved_contexts)
+        return retrieved_context_string
 
-# If chunks is a list of strings, convert them to document objects
-documents = [Document(page_content=text) for text in chunks]
+    def generate_prompt(self, retrieved_context_string: str) -> PromptValue:
+        prompt = self.prompt_template.invoke({"language": self.programming_language, "framework": self.framework, "resource_type": self.resource_type, "control_options": retrieved_context_string, "capability": self.ontology})
+        return prompt
 
-# 4. Create vectorstore (Chroma) from the documents
-vector_store = Chroma.from_documents(documents, embeddings)
+    def generate_skill_code(self) -> BaseMessage:
+        """ Generate code from an OWL capability ontology. """
 
-# Prompting
-language = "Python"
-framework = "ROS2"
-resource_type = "mobile robots"
+        chunk_documents = self.generate_chunks_from_context()
+        self.set_vector_store(chunk_documents)
+        retrieved_context_string = self.retrieve_relevant_context()
+        prompt = self.generate_prompt(retrieved_context_string)
 
-system_prompt_template_path = os.path.join(base_dir, "../prompt-templates", "system_prompt.txt")
-system_prompt_template = load_file(system_prompt_template_path)
-
-user_prompt_template_path = os.path.join(base_dir, "../prompt-templates", "user_prompt.txt")
-user_prompt_template = load_file(user_prompt_template_path)
-
-prompt_template = ChatPromptTemplate.from_messages(
-    [("system", system_prompt_template), ('user', user_prompt_template)]
-)
-
-ontology_path = os.path.join(base_dir, "../../capability-models", "set-velocity.ttl")
-ontology = load_file(ontology_path)
-
-
-query = f"Generate {language} {framework} code from an OWL ontology in Turtle syntax for a {resource_type}.  {ontology}"
-retrieved_docs = vector_store.similarity_search(query)
-docs_content = "\n\n".join(doc.page_content for doc in retrieved_docs)
-prompt = prompt_template.invoke({"language": language, "framework": framework, "resource_type": resource_type, "control_options": docs_content, "capability": ontology})
-answer = llm.invoke(prompt)
-
-print(answer)
+        answer = self.llm.invoke(prompt)
+        return answer
