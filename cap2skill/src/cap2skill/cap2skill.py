@@ -81,3 +81,19 @@ class Cap2Skill:
 
         answer = self.llm.invoke(prompt)
         return answer
+
+# for testing purposes
+if __name__ == "__main__":
+    context_path = os.path.join(BASE_DIR, "../docs", "ros2_system_report.md")
+    ontology_path = os.path.join(BASE_DIR, "../../capability-models", "set-velocity.ttl")
+    context = load_file(context_path)
+    ontology = load_file(ontology_path)
+    cap2skill = Cap2Skill("Python", "ROS2", "Mobile Robots", context, ontology)
+
+    chunks = cap2skill.generate_chunks_from_context()
+    cap2skill.set_vector_store(chunks)
+    retrieved_context = cap2skill.retrieve_relevant_context()
+    
+    file_name = "ros2_retrieved_context.txt"
+    with open(file_name, "w") as file:
+        file.write(retrieved_context)
