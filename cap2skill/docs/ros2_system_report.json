@@ -1,0 +1,1081 @@
+{
+    "timestamp": "2025-03-04 13:46:42",
+    "ros2_entities": {
+        "topics": [
+            {
+                "name": "/clock",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "rosgraph_msgs/msg/Clock",
+                        "details": "# This message communicates the current time.\n#\n# For more information, see https://design.ros2.org/articles/clock_and_time.html.\nbuiltin_interfaces/Time clock\n\tint32 sec\n\tuint32 nanosec"
+                    }
+                ]
+            },
+            {
+                "name": "/cmd_vel",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "geometry_msgs/msg/Twist",
+                        "details": "# This expresses velocity in free space broken into its linear and angular parts.\n\nVector3  linear\n\tfloat64 x\n\tfloat64 y\n\tfloat64 z\nVector3  angular\n\tfloat64 x\n\tfloat64 y\n\tfloat64 z"
+                    }
+                ]
+            },
+            {
+                "name": "/dynamic_joint_states",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "control_msgs/msg/DynamicJointState",
+                        "details": "std_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\n# List of resource names, e.g. [\"arm_joint_1\", \"arm_joint_2\", \"gripper_joint\"]\nstring[] joint_names\n# Key-value pairs representing interfaces and their corresponding values for each joint listed in `joint_names`\nInterfaceValue[] interface_values\n\tstring[] interface_names\n\tfloat64[] values"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/transition_event",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "lifecycle_msgs/msg/TransitionEvent",
+                        "details": "# The time point at which this event occurred.\nuint64 timestamp\n\n# The id and label of this transition event.\nTransition transition\n\tuint8 TRANSITION_CREATE = 0\n\tuint8 TRANSITION_CONFIGURE = 1\n\tuint8 TRANSITION_CLEANUP = 2\n\tuint8 TRANSITION_ACTIVATE = 3\n\tuint8 TRANSITION_DEACTIVATE = 4\n\tuint8 TRANSITION_UNCONFIGURED_SHUTDOWN  = 5\n\tuint8 TRANSITION_INACTIVE_SHUTDOWN = 6\n\tuint8 TRANSITION_ACTIVE_SHUTDOWN = 7\n\tuint8 TRANSITION_DESTROY = 8\n\tuint8 TRANSITION_ON_CONFIGURE_SUCCESS = 10\n\tuint8 TRANSITION_ON_CONFIGURE_FAILURE = 11\n\tuint8 TRANSITION_ON_CONFIGURE_ERROR = 12\n\tuint8 TRANSITION_ON_CLEANUP_SUCCESS = 20\n\tuint8 TRANSITION_ON_CLEANUP_FAILURE = 21\n\tuint8 TRANSITION_ON_CLEANUP_ERROR = 22\n\tuint8 TRANSITION_ON_ACTIVATE_SUCCESS = 30\n\tuint8 TRANSITION_ON_ACTIVATE_FAILURE = 31\n\tuint8 TRANSITION_ON_ACTIVATE_ERROR = 32\n\tuint8 TRANSITION_ON_DEACTIVATE_SUCCESS = 40\n\tuint8 TRANSITION_ON_DEACTIVATE_FAILURE = 41\n\tuint8 TRANSITION_ON_DEACTIVATE_ERROR = 42\n\tuint8 TRANSITION_ON_SHUTDOWN_SUCCESS = 50\n\tuint8 TRANSITION_ON_SHUTDOWN_FAILURE = 51\n\tuint8 TRANSITION_ON_SHUTDOWN_ERROR = 52\n\tuint8 TRANSITION_ON_ERROR_SUCCESS = 60\n\tuint8 TRANSITION_ON_ERROR_FAILURE = 61\n\tuint8 TRANSITION_ON_ERROR_ERROR = 62\n\tuint8 TRANSITION_CALLBACK_SUCCESS = 97\n\tuint8 TRANSITION_CALLBACK_FAILURE = 98\n\tuint8 TRANSITION_CALLBACK_ERROR = 99\n\t##\n\t##\n\tuint8 id\n\tstring label\n\n# The starting state from which this event transitioned.\nState start_state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label\n\n# The end state of this transition event.\nState goal_state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_states",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "sensor_msgs/msg/JointState",
+                        "details": "# This is a message that holds data to describe the state of a set of torque controlled joints.\n#\n# The state of each joint (revolute or prismatic) is defined by:\n#  * the position of the joint (rad or m),\n#  * the velocity of the joint (rad/s or m/s) and\n#  * the effort that is applied in the joint (Nm or N).\n#\n# Each joint is uniquely identified by its name\n# The header specifies the time at which the joint states were recorded. All the joint states\n# in one message have to be recorded at the same time.\n#\n# This message consists of a multiple arrays, one for each part of the joint state.\n# The goal is to make each of the fields optional. When e.g. your joints have no\n# effort associated with them, you can leave the effort array empty.\n#\n# All arrays in this message should have the same size, or be empty.\n# This is the only way to uniquely associate the joint name with the correct\n# states.\n\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\nstring[] name\nfloat64[] position\nfloat64[] velocity\nfloat64[] effort"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/controller_state",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "control_msgs/msg/JointTrajectoryControllerState",
+                        "details": "# This message presents current controller state of JTC\n\n# Header timestamp should be update time of controller state\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\nstring[] joint_names\n# The set point, that is, desired state.\ntrajectory_msgs/JointTrajectoryPoint reference\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current value of the process (ie: latest sensor measurement on the controlled value).\ntrajectory_msgs/JointTrajectoryPoint feedback\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# The error of the controlled value, essentially reference - feedback (for a regular PID implementation).\ntrajectory_msgs/JointTrajectoryPoint error\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current output of the controller.\ntrajectory_msgs/JointTrajectoryPoint output\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# -- deprecated --\ntrajectory_msgs/JointTrajectoryPoint desired\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/JointTrajectoryPoint actual\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n\nstring[] multi_dof_joint_names\n# The set point, that is, desired state.\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_reference\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current value of the process (ie: latest sensor measurement on the controlled value).\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_feedback\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# The error of the controlled value, essentially reference - feedback (for a regular PID implementation).\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_error\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current output of the controller.\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_output\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# -- deprecated --\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_desired\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_actual\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/joint_trajectory",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "trajectory_msgs/msg/JointTrajectory",
+                        "details": "# The header is used to specify the coordinate frame and the reference time for\n# the trajectory durations\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\n# The names of the active joints in each trajectory point. These names are\n# ordered and must correspond to the values in each trajectory point.\nstring[] joint_names\n\n# Array of trajectory points, which describe the positions, velocities,\n# accelerations and/or efforts of the joints at each time point.\nJointTrajectoryPoint[] points\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/state",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "control_msgs/msg/JointTrajectoryControllerState",
+                        "details": "# This message presents current controller state of JTC\n\n# Header timestamp should be update time of controller state\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\nstring[] joint_names\n# The set point, that is, desired state.\ntrajectory_msgs/JointTrajectoryPoint reference\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current value of the process (ie: latest sensor measurement on the controlled value).\ntrajectory_msgs/JointTrajectoryPoint feedback\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# The error of the controlled value, essentially reference - feedback (for a regular PID implementation).\ntrajectory_msgs/JointTrajectoryPoint error\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current output of the controller.\ntrajectory_msgs/JointTrajectoryPoint output\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# -- deprecated --\ntrajectory_msgs/JointTrajectoryPoint desired\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/JointTrajectoryPoint actual\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n\nstring[] multi_dof_joint_names\n# The set point, that is, desired state.\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_reference\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current value of the process (ie: latest sensor measurement on the controlled value).\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_feedback\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# The error of the controlled value, essentially reference - feedback (for a regular PID implementation).\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_error\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# Current output of the controller.\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_output\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n# -- deprecated --\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_desired\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_actual\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/transition_event",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "lifecycle_msgs/msg/TransitionEvent",
+                        "details": "# The time point at which this event occurred.\nuint64 timestamp\n\n# The id and label of this transition event.\nTransition transition\n\tuint8 TRANSITION_CREATE = 0\n\tuint8 TRANSITION_CONFIGURE = 1\n\tuint8 TRANSITION_CLEANUP = 2\n\tuint8 TRANSITION_ACTIVATE = 3\n\tuint8 TRANSITION_DEACTIVATE = 4\n\tuint8 TRANSITION_UNCONFIGURED_SHUTDOWN  = 5\n\tuint8 TRANSITION_INACTIVE_SHUTDOWN = 6\n\tuint8 TRANSITION_ACTIVE_SHUTDOWN = 7\n\tuint8 TRANSITION_DESTROY = 8\n\tuint8 TRANSITION_ON_CONFIGURE_SUCCESS = 10\n\tuint8 TRANSITION_ON_CONFIGURE_FAILURE = 11\n\tuint8 TRANSITION_ON_CONFIGURE_ERROR = 12\n\tuint8 TRANSITION_ON_CLEANUP_SUCCESS = 20\n\tuint8 TRANSITION_ON_CLEANUP_FAILURE = 21\n\tuint8 TRANSITION_ON_CLEANUP_ERROR = 22\n\tuint8 TRANSITION_ON_ACTIVATE_SUCCESS = 30\n\tuint8 TRANSITION_ON_ACTIVATE_FAILURE = 31\n\tuint8 TRANSITION_ON_ACTIVATE_ERROR = 32\n\tuint8 TRANSITION_ON_DEACTIVATE_SUCCESS = 40\n\tuint8 TRANSITION_ON_DEACTIVATE_FAILURE = 41\n\tuint8 TRANSITION_ON_DEACTIVATE_ERROR = 42\n\tuint8 TRANSITION_ON_SHUTDOWN_SUCCESS = 50\n\tuint8 TRANSITION_ON_SHUTDOWN_FAILURE = 51\n\tuint8 TRANSITION_ON_SHUTDOWN_ERROR = 52\n\tuint8 TRANSITION_ON_ERROR_SUCCESS = 60\n\tuint8 TRANSITION_ON_ERROR_FAILURE = 61\n\tuint8 TRANSITION_ON_ERROR_ERROR = 62\n\tuint8 TRANSITION_CALLBACK_SUCCESS = 97\n\tuint8 TRANSITION_CALLBACK_FAILURE = 98\n\tuint8 TRANSITION_CALLBACK_ERROR = 99\n\t##\n\t##\n\tuint8 id\n\tstring label\n\n# The starting state from which this event transitioned.\nState start_state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label\n\n# The end state of this transition event.\nState goal_state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label"
+                    }
+                ]
+            },
+            {
+                "name": "/odom",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "nav_msgs/msg/Odometry",
+                        "details": "# This represents an estimate of a position and velocity in free space.\n# The pose in this message should be specified in the coordinate frame given by header.frame_id\n# The twist in this message should be specified in the coordinate frame given by the child_frame_id\n\n# Includes the frame id of the pose parent.\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\n# Frame id the pose points to. The twist is in this coordinate frame.\nstring child_frame_id\n\n# Estimated pose that is typically relative to a fixed world frame.\ngeometry_msgs/PoseWithCovariance pose\n\tPose pose\n\t\tPoint position\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion orientation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tfloat64[36] covariance\n\n# Estimated linear and angular velocity relative to child_frame_id.\ngeometry_msgs/TwistWithCovariance twist\n\tTwist twist\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tfloat64[36] covariance"
+                    }
+                ]
+            },
+            {
+                "name": "/parameter_events",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/msg/ParameterEvent",
+                        "details": "# This message contains a parameter event.\n# Because the parameter event was an atomic update, a specific parameter name\n# can only be in one of the three sets.\n\n# The time stamp when this parameter event occurred.\nbuiltin_interfaces/Time stamp\n\tint32 sec\n\tuint32 nanosec\n\n# Fully qualified ROS path to node.\nstring node\n\n# New parameters that have been set for this node.\nParameter[] new_parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n# Parameters that have been changed during this event.\nParameter[] changed_parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n# Parameters that have been deleted during this event.\nParameter[] deleted_parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/performance_metrics",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/msg/PerformanceMetrics",
+                        "details": "std_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\nfloat64 real_time_factor\ngazebo_msgs/SensorPerformanceMetric[] sensors\n\tstring name\n\tfloat64 sim_update_rate\n\tfloat64 real_update_rate\n\tfloat64 fps"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_description",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "std_msgs/msg/String",
+                        "details": "# This was originally provided as an example message.\n# It is deprecated as of Foxy\n# It is recommended to create your own semantically meaningful message.\n# However if you would like to continue using this please use the equivalent in example_msgs.\n\nstring data"
+                    }
+                ]
+            },
+            {
+                "name": "/rosout",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/msg/Log",
+                        "details": "##\n## Severity level constants\n##\n## These logging levels follow the Python Standard\n## https://docs.python.org/3/library/logging.html#logging-levels\n## And are implemented in rcutils as well\n## https://github.com/ros2/rcutils/blob/35f29850064e0c33a4063cbc947ebbfeada11dba/include/rcutils/logging.h#L164-L172\n## This leaves space for other standard logging levels to be inserted in the middle in the future,\n## as well as custom user defined levels.\n## Since there are several other logging enumeration standard for different implementations,\n## other logging implementations may need to provide level mappings to match their internal implementations.\n##\n\n# Debug is for pedantic information, which is useful when debugging issues.\nbyte DEBUG=10\n\n# Info is the standard informational level and is used to report expected\n# information.\nbyte INFO=20\n\n# Warning is for information that may potentially cause issues or possibly unexpected\n# behavior.\nbyte WARN=30\n\n# Error is for information that this node cannot resolve.\nbyte ERROR=40\n\n# Information about a impending node shutdown.\nbyte FATAL=50\n\n##\n## Fields\n##\n\n# Timestamp when this message was generated by the node.\nbuiltin_interfaces/Time stamp\n\tint32 sec\n\tuint32 nanosec\n\n# Corresponding log level, see above definitions.\nuint8 level\n\n# The name representing the logger this message came from.\nstring name\n\n# The full log message.\nstring msg\n\n# The file the message came from.\nstring file\n\n# The function the message came from.\nstring function\n\n# The line in the file the message came from.\nuint32 line"
+                    }
+                ]
+            },
+            {
+                "name": "/scan",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "sensor_msgs/msg/LaserScan",
+                        "details": "# Single scan from a planar laser range-finder\n#\n# If you have another ranging device with different behavior (e.g. a sonar\n# array), please find or create a different message, since applications\n# will make fairly laser-specific assumptions about this data\n\nstd_msgs/Header header # timestamp in the header is the acquisition time of\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n                             # the first ray in the scan.\n                             #\n                             # in frame frame_id, angles are measured around\n                             # the positive Z axis (counterclockwise, if Z is up)\n                             # with zero angle being forward along the x axis\n\nfloat32 angle_min            # start angle of the scan [rad]\nfloat32 angle_max            # end angle of the scan [rad]\nfloat32 angle_increment      # angular distance between measurements [rad]\n\nfloat32 time_increment       # time between measurements [seconds] - if your scanner\n                             # is moving, this will be used in interpolating position\n                             # of 3d points\nfloat32 scan_time            # time between scans [seconds]\n\nfloat32 range_min            # minimum range value [m]\nfloat32 range_max            # maximum range value [m]\n\nfloat32[] ranges             # range data [m]\n                             # (Note: values < range_min or > range_max should be discarded)\nfloat32[] intensities        # intensity data [device-specific units].  If your\n                             # device does not provide intensities, please leave\n                             # the array empty."
+                    }
+                ]
+            },
+            {
+                "name": "/scan2",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "sensor_msgs/msg/LaserScan",
+                        "details": "# Single scan from a planar laser range-finder\n#\n# If you have another ranging device with different behavior (e.g. a sonar\n# array), please find or create a different message, since applications\n# will make fairly laser-specific assumptions about this data\n\nstd_msgs/Header header # timestamp in the header is the acquisition time of\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n                             # the first ray in the scan.\n                             #\n                             # in frame frame_id, angles are measured around\n                             # the positive Z axis (counterclockwise, if Z is up)\n                             # with zero angle being forward along the x axis\n\nfloat32 angle_min            # start angle of the scan [rad]\nfloat32 angle_max            # end angle of the scan [rad]\nfloat32 angle_increment      # angular distance between measurements [rad]\n\nfloat32 time_increment       # time between measurements [seconds] - if your scanner\n                             # is moving, this will be used in interpolating position\n                             # of 3d points\nfloat32 scan_time            # time between scans [seconds]\n\nfloat32 range_min            # minimum range value [m]\nfloat32 range_max            # maximum range value [m]\n\nfloat32[] ranges             # range data [m]\n                             # (Note: values < range_min or > range_max should be discarded)\nfloat32[] intensities        # intensity data [device-specific units].  If your\n                             # device does not provide intensities, please leave\n                             # the array empty."
+                    }
+                ]
+            },
+            {
+                "name": "/tf",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "tf2_msgs/msg/TFMessage",
+                        "details": "geometry_msgs/TransformStamped[] transforms\n\t#\n\t#\n\tstd_msgs/Header header\n\t\tbuiltin_interfaces/Time stamp\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tstring frame_id\n\tstring child_frame_id\n\tTransform transform\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1"
+                    }
+                ]
+            },
+            {
+                "name": "/tf_static",
+                "type": "topic",
+                "interfaces": [
+                    {
+                        "name": "tf2_msgs/msg/TFMessage",
+                        "details": "geometry_msgs/TransformStamped[] transforms\n\t#\n\t#\n\tstd_msgs/Header header\n\t\tbuiltin_interfaces/Time stamp\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tstring frame_id\n\tstring child_frame_id\n\tTransform transform\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1"
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "/apply_joint_effort",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/ApplyJointEffort",
+                        "details": "# set urdf joint effort\nstring joint_name                       # joint to apply wrench (linear force and torque)\nfloat64 effort                          # effort to apply\nbuiltin_interfaces/Time start_time      # optional wrench application start time (seconds)\n\tint32 sec\n\tuint32 nanosec\n                                        # if start_time < current time, start as soon as possible\nbuiltin_interfaces/Duration  duration   # optional duration of wrench application time (seconds)\n\tint32 sec\n\tuint32 nanosec\n                                        # if duration < 0, apply wrench continuously without end\n                                        # if duration = 0, do nothing\n                                        # if duration < step size, assume step size and\n                                        # display warning in status_message\n---\nbool success                            # return true if effort application is successful\nstring status_message                   # comments if available"
+                    }
+                ]
+            },
+            {
+                "name": "/apply_link_wrench",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/ApplyLinkWrench",
+                        "details": "# Apply Wrench to Gazebo Link.\n# via the callback mechanism\n# all Gazebo operations are made in world frame\nstring link_name                          # Gazebo link to apply wrench (linear force and torque)\n                                          # wrench is applied in the gazebo world by default\n                                          # link names are prefixed by model name, e.g. pr2::base_link\nstring reference_frame                    # wrench is defined in the reference frame of this entity\n                                          # use inertial frame if left empty\n                                          # frame names are links prefixed by model name, e.g. pr2::base_link\ngeometry_msgs/Point  reference_point      # wrench is defined at this location in the reference frame\n\tfloat64 x\n\tfloat64 y\n\tfloat64 z\ngeometry_msgs/Wrench wrench               # wrench applied to the origin of the link\n\tVector3  force\n\t\tfloat64 x\n\t\tfloat64 y\n\t\tfloat64 z\n\tVector3  torque\n\t\tfloat64 x\n\t\tfloat64 y\n\t\tfloat64 z\nbuiltin_interfaces/Time start_time        # (optional) wrench application start time (seconds)\n\tint32 sec\n\tuint32 nanosec\n                                          # if start_time is not specified, or\n                                          # start_time < current time, start as soon as possible\nbuiltin_interfaces/Duration duration      # optional duration of wrench application time (seconds)\n\tint32 sec\n\tuint32 nanosec\n                                          # if duration < 0, apply wrench continuously without end\n                                          # if duration = 0, do nothing\n                                          # if duration < step size, apply wrench\n                                          # for one step size\n---\nbool success                              # return true if set wrench successful\nstring status_message                     # comments if available"
+                    }
+                ]
+            },
+            {
+                "name": "/clear_joint_efforts",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/JointRequest",
+                        "details": "string joint_name   # name of the joint requested\n---"
+                    }
+                ]
+            },
+            {
+                "name": "/clear_link_wrenches",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/LinkRequest",
+                        "details": "string link_name   # name of the link requested. link names are prefixed by model name, e.g. pr2::base_link\n---"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/configure_controller",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ConfigureController",
+                        "details": "# The ConfigureController service allows you to configure a single controller\n# inside controller_manager\n\n# To configure a controller, specify the \"name\" of the controller.\n# The return value \"ok\" indicates if the controller was successfully\n# configured or not.\n\nstring name\n---\nbool ok"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/list_controller_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ListControllerTypes",
+                        "details": "# The ListControllers service returns a list of controller types that are known\n# to the controller manager plugin mechanism.\n\n---\nstring[] types\nstring[] base_classes"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/list_controllers",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ListControllers",
+                        "details": "# The ListControllers service returns a list of controller names/states/types of the\n# controllers that are loaded inside the controller_manager.\n\n---\ncontroller_manager_msgs/ControllerState[] controller\n\tstring name        #\n\tstring state        #\n\tstring type        #\n\tstring[] claimed_interfaces        #\n\tstring[] required_command_interfaces        #\n\tstring[] required_state_interfaces        #\n\tbool is_chainable        #\n\tbool is_chained        #\n\tstring[] reference_interfaces        #\n\tChainConnection[] chain_connections        #\n\t\tstring name        #\n\t\tstring[] reference_interfaces        #"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/list_hardware_components",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ListHardwareComponents",
+                        "details": "# The ListHardwareComponents service returns a list of hardware HardwareComponentsState.\n# This will convey name, component_type, state and type of the components\n# that are loaded inside the resource_manager.\n\n---\nHardwareComponentState[] component\n\tstring name\n\tstring type\n\tstring class_type\n\tlifecycle_msgs/State state\n\t\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\t\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\t\tuint8 PRIMARY_STATE_INACTIVE = 2\n\t\tuint8 PRIMARY_STATE_ACTIVE = 3\n\t\tuint8 PRIMARY_STATE_FINALIZED = 4\n\t\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\t\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\t\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\t\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\t\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\t\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\t\tuint8 id\n\t\tstring label\n\tHardwareInterface[] command_interfaces\n\t\tstring name\n\t\tbool is_available\n\t\tbool is_claimed\n\tHardwareInterface[] state_interfaces\n\t\tstring name\n\t\tbool is_available\n\t\tbool is_claimed"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/list_hardware_interfaces",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ListHardwareInterfaces",
+                        "details": "---\nHardwareInterface[] command_interfaces\n\tstring name\n\tbool is_available\n\tbool is_claimed\nHardwareInterface[] state_interfaces\n\tstring name\n\tbool is_available\n\tbool is_claimed"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/load_controller",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/LoadController",
+                        "details": "# The LoadController service allows you to load a single controller\n# inside controller_manager\n\n# To load a controller, specify the \"name\" of the controller.\n# The return value \"ok\" indicates if the controller was successfully\n# constructed and initialized or not.\n\nstring name\n---\nbool ok"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/reload_controller_libraries",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/ReloadControllerLibraries",
+                        "details": "# The ReloadControllerLibraries service will reload all controllers that are available in\n# the system as plugins\n\n# Reloading libraries only works if there are no controllers loaded. If there\n# are still some controllers loaded, the reloading will fail.\n# If this bool is set to true, all loaded controllers will get\n# killed automatically, and the reloading can succeed.\nbool force_kill\n---\nbool ok"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/set_hardware_component_state",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/SetHardwareComponentState",
+                        "details": "# The SetHardwareComponentState service allows to control life-cycle of a single hardware component.\n# Supported states are defined in the design document of LifecycleNodes available at:\n# https://design.ros2.org/articles/node_lifecycle.html\n# To control life-cycle of a hardware component, specify its \"name\" and \"target_state\".\n# Target state may be defined by \"id\" using a constant from `lifecycle_msgs/msg/State` or a label\n# using definitions from `hardware_interface/types/lifecycle_state_names.hpp` file.\n# The return value \"ok\" indicates if the component has successfully changed its state to \"target_state\".\n# The return value \"state\" returns current state of the hardware component.\n\nstring name\nlifecycle_msgs/State target_state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label\n---\nbool ok\nlifecycle_msgs/State state\n\tuint8 PRIMARY_STATE_UNKNOWN = 0\n\tuint8 PRIMARY_STATE_UNCONFIGURED = 1\n\tuint8 PRIMARY_STATE_INACTIVE = 2\n\tuint8 PRIMARY_STATE_ACTIVE = 3\n\tuint8 PRIMARY_STATE_FINALIZED = 4\n\tuint8 TRANSITION_STATE_CONFIGURING = 10\n\tuint8 TRANSITION_STATE_CLEANINGUP = 11\n\tuint8 TRANSITION_STATE_SHUTTINGDOWN = 12\n\tuint8 TRANSITION_STATE_ACTIVATING = 13\n\tuint8 TRANSITION_STATE_DEACTIVATING = 14\n\tuint8 TRANSITION_STATE_ERRORPROCESSING = 15\n\tuint8 id\n\tstring label"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/switch_controller",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/SwitchController",
+                        "details": "# The SwitchController service allows you deactivate a number of controllers\n# and activate a number of controllers, all in one single timestep of the\n# controller manager's control loop.\n\n# To switch controllers, specify\n#  * the list of controller names to activate,\n#  * the list of controller names to deactivate, and\n#  * the strictness (BEST_EFFORT or STRICT)\n#    * STRICT means that switching will fail if anything goes wrong (an invalid\n#      controller name, a controller that failed to activate, etc. )\n#    * BEST_EFFORT means that even when something goes wrong with on controller,\n#      the service will still try to activate/stop the remaining controllers\n#  * activate the controllers as soon as their hardware dependencies are ready, will\n#    wait for all interfaces to be ready otherwise\n#  * the timeout before aborting pending controllers. Zero for infinite\n\n# The return value \"ok\" indicates if the controllers were switched\n# successfully or not.  The meaning of success depends on the\n# specified strictness.\n\n\nstring[] activate_controllers\nstring[] deactivate_controllers\nstring[] start_controllers       # DEPRECATED: Use activate_controllers filed instead\nstring[] stop_controllers        # DEPRECATED: Use deactivate_controllers filed instead\nint32 strictness\nint32 BEST_EFFORT=1\nint32 STRICT=2\nbool start_asap                 # DEPRECATED: Use activate_asap filed instead\nbool activate_asap\nbuiltin_interfaces/Duration timeout\n\tint32 sec\n\tuint32 nanosec\n---\nbool ok"
+                    }
+                ]
+            },
+            {
+                "name": "/controller_manager/unload_controller",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "controller_manager_msgs/srv/UnloadController",
+                        "details": "# The UnloadController service allows you to unload a single controller\n# from controller_manager\n\n# To unload a controller, specify the \"name\" of the controller.\n# The return value \"ok\" indicates if the controller was successfully\n# unloaded or not\n\nstring name\n---\nbool ok"
+                    }
+                ]
+            },
+            {
+                "name": "/delete_entity",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/DeleteEntity",
+                        "details": "string name                       # Name of the Gazebo entity to be deleted. This can be either\n                                  # a model or a light.\n---\nbool success                      # Return true if deletion is successful.\nstring status_message             # Comments if available."
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/gazebo_ros2_control/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/get_model_list",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/GetModelList",
+                        "details": "---\nstd_msgs/Header header               # Standard metadata for higher-level stamped data types.\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n                                     # * header.stamp Simulation time when data was collected.\nstring[] model_names                 # list of models in the world\nbool success                         # return true if get successful"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_state_broadcaster/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/query_state",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "control_msgs/srv/QueryTrajectoryState",
+                        "details": "builtin_interfaces/Time time\n\tint32 sec\n\tuint32 nanosec\n---\nbool success   # indicate successful run of triggered service\nstring message # informational, e.g. for error messages\n\nstring[] name\nfloat64[] position\nfloat64[] velocity\nfloat64[] acceleration"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/joint_trajectory_controller/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_1_sensor_plugin/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/lidar_2_sensor_plugin/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/object_controller/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/pause_physics",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "std_srvs/srv/Empty",
+                        "details": "---"
+                    }
+                ]
+            },
+            {
+                "name": "/reset_simulation",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "std_srvs/srv/Empty",
+                        "details": "---"
+                    }
+                ]
+            },
+            {
+                "name": "/reset_world",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "std_srvs/srv/Empty",
+                        "details": "---"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/robot_state_publisher/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/ros2_inspector/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/spawn_entity",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "gazebo_msgs/srv/SpawnEntity",
+                        "details": "string name                       # Name of the entity to be spawned (optional).\nstring xml                        # Entity XML description as a string, either URDF or SDF.\nstring robot_namespace            # Spawn robot and all ROS interfaces under this namespace\ngeometry_msgs/Pose initial_pose   # Initial entity pose.\n\tPoint position\n\t\tfloat64 x\n\t\tfloat64 y\n\t\tfloat64 z\n\tQuaternion orientation\n\t\tfloat64 x 0\n\t\tfloat64 y 0\n\t\tfloat64 z 0\n\t\tfloat64 w 1\nstring reference_frame            # initial_pose is defined relative to the frame of this entity.\n                                  # If left empty or \"world\" or \"map\", then gazebo world frame is\n                                  # used.\n                                  # If non-existent entity is specified, an error is returned\n                                  # and the entity is not spawned.\n---\nbool success                      # Return true if spawned successfully.\nstring status_message             # Comments if available."
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/describe_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/DescribeParameters",
+                        "details": "# A list of parameters of which to get the descriptor.\nstring[] names\n\n---\n# A list of the descriptors of all parameters requested in the same order\n# as they were requested. This list has the same length as the list of\n# parameters requested.\nParameterDescriptor[] descriptors\n\tstring name\n\tuint8 type\n\tstring description\n\t#\n\tstring additional_constraints\n\tbool read_only false\n\tbool dynamic_typing false\n\t#\n\tFloatingPointRange[<=1] floating_point_range\n\t\tfloat64 from_value\n\t\tfloat64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\t#\n\t\tfloat64 step\n\tIntegerRange[<=1] integer_range\n\t\tint64 from_value\n\t\tint64 to_value\n\t\t#\n\t\t#\n\t\t#\n\t\tuint64 step"
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/get_parameter_types",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameterTypes",
+                        "details": "# A list of parameter names.\n# TODO(wjwwood): link to parameter naming rules.\nstring[] names\n\n---\n# List of types which is the same length and order as the provided names.\n#\n# The type enum is defined in ParameterType.msg. ParameterType.PARAMETER_NOT_SET\n# indicates that the parameter is not currently set.\nuint8[] types"
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/get_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/GetParameters",
+                        "details": "# TODO(wjwwood): Decide on the rules for grouping, nodes, and parameter \"names\"\n# in general, then link to that.\n#\n# For more information about parameters and naming rules, see:\n# https://design.ros2.org/articles/ros_parameters.html\n# https://github.com/ros2/design/pull/241\n\n# A list of parameter names to get.\nstring[] names\n\n---\n# List of values which is the same length and order as the provided names. If a\n# parameter was not yet set, the value will have PARAMETER_NOT_SET as the\n# type.\nParameterValue[] values\n\tuint8 type\n\tbool bool_value\n\tint64 integer_value\n\tfloat64 double_value\n\tstring string_value\n\tbyte[] byte_array_value\n\tbool[] bool_array_value\n\tint64[] integer_array_value\n\tfloat64[] double_array_value\n\tstring[] string_array_value"
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/list_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/ListParameters",
+                        "details": "# Recursively get parameters with unlimited depth.\nuint64 DEPTH_RECURSIVE=0\n\n# The list of parameter prefixes to query.\nstring[] prefixes\n\n# Relative depth from given prefixes to return.\n#\n# Use DEPTH_RECURSIVE to get the recursive parameters and prefixes for each prefix.\nuint64 depth\n\n---\n# The list of parameter names and their prefixes.\nListParametersResult result\n\tstring[] names\n\tstring[] prefixes"
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/set_parameters",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParameters",
+                        "details": "# A list of parameters to set.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting each parameter succeeded or not and why.\nSetParametersResult[] results\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/teleop/set_parameters_atomically",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "rcl_interfaces/srv/SetParametersAtomically",
+                        "details": "# A list of parameters to set atomically.\n#\n# This call will either set all values, or none of the values.\nParameter[] parameters\n\tstring name\n\tParameterValue value\n\t\tuint8 type\n\t\tbool bool_value\n\t\tint64 integer_value\n\t\tfloat64 double_value\n\t\tstring string_value\n\t\tbyte[] byte_array_value\n\t\tbool[] bool_array_value\n\t\tint64[] integer_array_value\n\t\tfloat64[] double_array_value\n\t\tstring[] string_array_value\n\n---\n# Indicates whether setting all of the parameters succeeded or not and why.\nSetParametersResult result\n\tbool successful\n\tstring reason"
+                    }
+                ]
+            },
+            {
+                "name": "/unpause_physics",
+                "type": "service",
+                "interfaces": [
+                    {
+                        "name": "std_srvs/srv/Empty",
+                        "details": "---"
+                    }
+                ]
+            }
+        ],
+        "actions": [
+            {
+                "name": "/joint_trajectory_controller/follow_joint_trajectory",
+                "type": "action",
+                "interfaces": [
+                    {
+                        "name": "control_msgs/action/FollowJointTrajectory",
+                        "details": "# The trajectory for all revolute, continuous or prismatic joints\ntrajectory_msgs/JointTrajectory trajectory\n\tstd_msgs/Header header\n\t\tbuiltin_interfaces/Time stamp\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tstring frame_id\n\tstring[] joint_names\n\tJointTrajectoryPoint[] points\n\t\tfloat64[] positions\n\t\tfloat64[] velocities\n\t\tfloat64[] accelerations\n\t\tfloat64[] effort\n\t\tbuiltin_interfaces/Duration time_from_start\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n# The trajectory for all planar or floating joints (i.e. individual joints with more than one DOF)\ntrajectory_msgs/MultiDOFJointTrajectory multi_dof_trajectory\n\tstd_msgs/Header header\n\t\tbuiltin_interfaces/Time stamp\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tstring frame_id\n\tstring[] joint_names\n\tMultiDOFJointTrajectoryPoint[] points\n\t\tgeometry_msgs/Transform[] transforms\n\t\t\tVector3 translation\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\t\tQuaternion rotation\n\t\t\t\tfloat64 x 0\n\t\t\t\tfloat64 y 0\n\t\t\t\tfloat64 z 0\n\t\t\t\tfloat64 w 1\n\t\tgeometry_msgs/Twist[] velocities\n\t\t\tVector3  linear\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\t\tVector3  angular\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\tgeometry_msgs/Twist[] accelerations\n\t\t\tVector3  linear\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\t\tVector3  angular\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\tbuiltin_interfaces/Duration time_from_start\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\n# Tolerances for the trajectory.  If the measured joint values fall\n# outside the tolerances the trajectory goal is aborted.  Any\n# tolerances that are not specified (by being omitted or set to 0) are\n# set to the defaults for the action server (often taken from the\n# parameter server).\n\n# Tolerances applied to the joints as the trajectory is executed.  If\n# violated, the goal aborts with error_code set to\n# PATH_TOLERANCE_VIOLATED.\nJointTolerance[] path_tolerance\n\t#\n\tstring name\n\tfloat64 position  #\n\tfloat64 velocity  #\n\tfloat64 acceleration  #\nJointComponentTolerance[] component_path_tolerance\n\tuint16 X_AXIS=1\n\tuint16 Y_AXIS=2\n\tuint16 Z_AXIS=3\n\tuint16 TRANSLATION=4\n\tuint16 ROTATION=5\n\tstring joint_name\n\tuint16 component\n\tfloat64 position\n\tfloat64 velocity\n\tfloat64 acceleration\n\n# To report success, the joints must be within goal_tolerance of the\n# final trajectory value.  The goal must be achieved by time the\n# trajectory ends plus goal_time_tolerance.  (goal_time_tolerance\n# allows some leeway in time, so that the trajectory goal can still\n# succeed even if the joints reach the goal some time after the\n# precise end time of the trajectory).\n#\n# If the joints are not within goal_tolerance after \"trajectory finish\n# time\" + goal_time_tolerance, the goal aborts with error_code set to\n# GOAL_TOLERANCE_VIOLATED\nJointTolerance[] goal_tolerance\n\t#\n\tstring name\n\tfloat64 position  #\n\tfloat64 velocity  #\n\tfloat64 acceleration  #\nJointComponentTolerance[] component_goal_tolerance\n\tuint16 X_AXIS=1\n\tuint16 Y_AXIS=2\n\tuint16 Z_AXIS=3\n\tuint16 TRANSLATION=4\n\tuint16 ROTATION=5\n\tstring joint_name\n\tuint16 component\n\tfloat64 position\n\tfloat64 velocity\n\tfloat64 acceleration\nbuiltin_interfaces/Duration goal_time_tolerance\n\tint32 sec\n\tuint32 nanosec\n\n---\nint32 error_code\nint32 SUCCESSFUL = 0\nint32 INVALID_GOAL = -1\nint32 INVALID_JOINTS = -2\nint32 OLD_HEADER_TIMESTAMP = -3\nint32 PATH_TOLERANCE_VIOLATED = -4\nint32 GOAL_TOLERANCE_VIOLATED = -5\n\n# Human readable description of the error code. Contains complementary\n# information that is especially useful when execution fails, for instance:\n# - INVALID_GOAL: The reason for the invalid goal (e.g., the requested\n#   trajectory is in the past).\n# - INVALID_JOINTS: The mismatch between the expected controller joints\n#   and those provided in the goal.\n# - PATH_TOLERANCE_VIOLATED and GOAL_TOLERANCE_VIOLATED: Which joint\n#   violated which tolerance, and by how much.\nstring error_string\n\n---\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\nstring[] joint_names\ntrajectory_msgs/JointTrajectoryPoint desired\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/JointTrajectoryPoint actual\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/JointTrajectoryPoint error\n\tfloat64[] positions\n\tfloat64[] velocities\n\tfloat64[] accelerations\n\tfloat64[] effort\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\n\nstring[] multi_dof_joint_names\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_desired\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_actual\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec\ntrajectory_msgs/MultiDOFJointTrajectoryPoint multi_dof_error\n\tgeometry_msgs/Transform[] transforms\n\t\tVector3 translation\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion rotation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tgeometry_msgs/Twist[] velocities\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tgeometry_msgs/Twist[] accelerations\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tbuiltin_interfaces/Duration time_from_start\n\t\tint32 sec\n\t\tuint32 nanosec"
+                    }
+                ]
+            }
+        ]
+    }
+}
