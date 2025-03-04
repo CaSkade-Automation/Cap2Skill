@@ -5,6 +5,7 @@ import subprocess
 import datetime
 import time
 import logging
+import json
 from enum import Enum
 
 class Communication(Enum):
@@ -29,17 +30,16 @@ def generate_report() -> None:
 
     # Header
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    report = f"# ROS2 System Report created on: {timestamp}"  
+    report = {"timestamp": timestamp, "ros2_entities": {}}  
     
     for comm_type in Communication:
-        report += f"\n## {comm_type.value.capitalize()}\n"
         comm_list = get_stable_communications(node, comm_type)
-        report = write_interface_details(comm_list, report)
+        report["ros2_entities"][comm_type.value] = write_interface_details(comm_list, comm_type.value[:-1])
 
     # Save in file
-    file_name = "ros2_system_report.md"
+    file_name = "ros2_system_report.json"
     with open(file_name, "w") as file:
-        file.write(report)
+        json.dump(report, file, indent=4)
     
     logger.info(f"Report was saved: {file_name}")
     
@@ -73,13 +73,22 @@ def get_stable_communications(node, communication_type: Communication, retries=5
         time.sleep(delay)
     return prev_result # Return last known stable state
 
-def write_interface_details(communication_list: list[tuple[str,list[str]]] | list[tuple[str, str]], report: str) -> str:
+def write_interface_details(communication_list: list[tuple[str,list[str]]] | list[tuple[str, str]], comm_type: str) -> str:
     """Append communication details (interface) to the report."""
+    interface_details = []
     for communication_name, interfaces in communication_list:
-        report += f"- **{communication_name}**:\n  - Type: {', '.join(interfaces) if isinstance(interfaces, list) else interfaces}\n"
-        for interface in (interfaces if isinstance(interfaces, list) else [interfaces]):
-            report += f"  - **Type Details:**\n{get_interface_details(interface)}\n"
-    return report
+        ros2_entity = {
+            "name": communication_name,
+            "type": comm_type, 
+            "interfaces": [
+                {
+                    "name": interface, 
+                    "details": get_interface_details(interface) 
+                } for interface in (interfaces if isinstance(interfaces, list) else [interfaces])
+            ]
+        }
+        interface_details.append(ros2_entity)
+    return interface_details
 
 def get_interface_details(interface: str) -> str:
     """Retrieve detailed information for a given ROS2 interface type."""
