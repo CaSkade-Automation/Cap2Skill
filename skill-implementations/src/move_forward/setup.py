@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'set_velocity'
+package_name = 'move_forward'
 
 setup(
     name=package_name,
@@ -15,12 +15,12 @@ setup(
     zip_safe=True,
     maintainer='Luis Miguel Vieira da Silva',
     maintainer_email='miguel.vieira@hsu-hh.de',
-    description='Skill implementation of set-velocity',
+    description='Skill implementation of move-forward',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'set-velocity = set_velocity.set_velocity:main',
+            'move-forward = move_forward.move_forward:main',
         ],
     },
 )

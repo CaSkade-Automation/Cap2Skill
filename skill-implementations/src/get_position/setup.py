@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'set_velocity'
+package_name = 'get_position'
 
 setup(
     name=package_name,
@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Luis Miguel Vieira da Silva',
+    maintainer='Miguel Vieira da Silva',
     maintainer_email='miguel.vieira@hsu-hh.de',
-    description='Skill implementation of set-velocity',
+    description='Skill implementation of get-position',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'set-velocity = set_velocity.set_velocity:main',
+            'get-position = get_position.get_position:main',
         ],
     },
 )

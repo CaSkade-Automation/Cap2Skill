@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>set_velocity</name>
+  <name>move_forward</name>
   <version>0.0.0</version>
-  <description>Skill implementation of set-velocity</description>
+  <description>Skill implementation of move-forward</description>
   <maintainer email="miguel.vieira@hsu-hh.de">Luis Miguel Vieira da Silva</maintainer>
   <license>Apache-2.0</license>
 
