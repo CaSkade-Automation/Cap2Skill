@@ -41,9 +41,7 @@ Rotate:Rotate_Constraint rdf:type owl:NamedIndividual ,
                                                 openmath:Application ,
                                                 CSS:CapabilityConstraint ;
                                        openmath:arguments (
-											[
-												Rotate:Rotate_Output_ID 
-											]
+											Rotate:Rotate_Output_ID 
 											[
 												rdf:type openmath:Application ; 
 												openmath:arguments (
@@ -59,7 +57,7 @@ Rotate:Rotate_Constraint rdf:type owl:NamedIndividual ,
 												) ;
 												openmath:operator <http://www.openmath.org/cd/arith1#mod> ; 
 											]
-									    )
+									    ) ; 
                                        openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
                                        CSS:references Rotate:Rotate_Input_ID ,
                                                       Rotate:Rotate_Output_ID ,
