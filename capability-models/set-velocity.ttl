@@ -19,7 +19,7 @@
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Velocity
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Velocity_TD
 SetVelocity:Velocity_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m/s" ;

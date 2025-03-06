@@ -19,14 +19,14 @@
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_X
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_X_TD
 GetPosition:Position_X_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_Y
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_Y_TD
 GetPosition:Position_Y_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;

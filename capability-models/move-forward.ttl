@@ -19,14 +19,14 @@
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Distance
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Distance_TD
 MoveForward:Distance_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the length of any object or distance in meters." .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Time
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Time_TD
 MoveForward:Time_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "s" ;

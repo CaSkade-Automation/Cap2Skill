@@ -19,7 +19,7 @@
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Degree
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Degree_TD
 Rotate:Degree_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "°" ;
