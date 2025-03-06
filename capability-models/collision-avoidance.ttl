@@ -193,7 +193,8 @@ CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID rdf:type owl:NamedIn
 							DINEN61360:Real ;
 					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_X_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
-					DINEN61360:Logic_Interpretation "=" .
+					DINEN61360:Logic_Interpretation "=" ;
+					DINEN61360:Value 0.0 . 
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Y_ID
@@ -203,7 +204,8 @@ CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID rdf:type owl:NamedIn
 							DINEN61360:Real ;
 					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Y_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
-					DINEN61360:Logic_Interpretation "=" .
+					DINEN61360:Logic_Interpretation "=" ;
+					DINEN61360:Value 0.0 .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Angular_ID
@@ -213,7 +215,8 @@ CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID rdf:type owl:N
 							DINEN61360:Real ;
 					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Angular_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
-					DINEN61360:Logic_Interpretation "=" .					
+					DINEN61360:Logic_Interpretation "=" ;
+					DINEN61360:Value 0.0 .					
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Time
@@ -286,6 +289,71 @@ CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_ID rdf:type owl:Na
 					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Degree_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .	
+
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700
+CollisionAvoidance:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability CollisionAvoidance:Collision-Avoidance ;
+					DINEN61360:has_Data_Element CollisionAvoidance:Neobotix-MMO-700_Velocity_X_DE ,
+							CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_DE ,
+							CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_DE ;
+					VDI3682:isCharacterizedBy CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID ,
+							CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID ,
+							CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_ID . 
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_DE
+CollisionAvoidance:Neobotix-MMO-700_Velocity_X_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID ,
+							CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID ;
+                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_ID
+CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_DE
+CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID ,
+							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID ;
+                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_ID
+CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+					 
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_DE
+CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_ID ,
+							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID ;
+                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_ID
+CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
 
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
