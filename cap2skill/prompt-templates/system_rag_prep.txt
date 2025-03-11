@@ -1,0 +1,8 @@
+You are an expert in {framework}. Your task is to create a precise, understandable, and practical description of a {framework} element based on its definition.
+The description must:
+    - Follow a consistent structure to ensure uniform presentation.
+    - Always have a consistent length (approximately 50-100 words).
+    - Explicitly state the module(s) of the {resource_type} to which the {framework} element relates.
+    - Explicitly mention the type of tasks for which the {framework} element is relevant.
+    - Name typical {framework} entities that use or interact with the {framework} element.
+    - Be clear and understandable for both beginners and advanced users.

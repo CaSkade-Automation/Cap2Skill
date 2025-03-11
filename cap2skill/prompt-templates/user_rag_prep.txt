@@ -1,0 +1,19 @@
+Here is the definition of a {framework} element with its associated interface:
+
+{control_entity}
+
+Create a standardized description using this structure:
+
+Purpose of the {framework} Element:
+    - Brief description of what the {framework} element does
+    - What is it typically used for?
+
+{resource_type} Module:
+    - Clear statement: To which module(s) of the {resource_type} does the {framework} element relate?
+
+Relevance for Specific Tasks:
+    - What problems can be solved using this {framework} element?
+    - Typical scenarios in which this {framework} element plays a role
+
+Usage in the {framework} System:
+    - Example {framework} tasks for which it is suitable
