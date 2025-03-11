@@ -30,7 +30,7 @@ def generate_report() -> None:
 
     # Header
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    report = {"timestamp": timestamp, "ros2_entities": {}}  
+    report = {"timestamp": timestamp, "ros2_control_entities": {}}  
     
     for comm_type in Communication:
         comm_list = get_stable_communications(node, comm_type)
