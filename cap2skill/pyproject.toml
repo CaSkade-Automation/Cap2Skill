@@ -18,6 +18,7 @@ dependencies = [
     "chromadb (>=0.6.3,<0.7.0)",
     "fastapi (>=0.115.8,<0.116.0)",
     "python-multipart (>=0.0.20,<0.0.21)",
+    "langchain-chroma (>=0.2.2,<0.3.0)",
 ]
 
 
