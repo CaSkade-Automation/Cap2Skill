@@ -1,50 +1,57 @@
-from fastapi import FastAPI, UploadFile, Form, File
-import os
-from cap2skill import Cap2Skill
-from langchain_core.messages import BaseMessage
 import uvicorn
+from fastapi import FastAPI, UploadFile, Form, File, HTTPException
+from typing import Dict
+from langchain_core.messages import BaseMessage
+from report_handling.control_report_handling import ControlReportHandling
+from report_handling.ros2_handling import ROS2ReportHandling
+from prompt_handling.prompt_handling import PromptHandler
+from cap2skill import Cap2Skill
 
 # Initialize FastAPI app
 app = FastAPI(title="Capability to Skill Generation with LLMs", version="1.0")
 
-# Temporary upload directory
-UPLOAD_DIR = "temp_uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+control_entities_handler: Dict[str, ControlReportHandling] = {}
 
-def save_uploaded_file(uploaded_file: UploadFile) -> str:
-    """Saves the uploaded file and returns its content."""
-    file_path = os.path.join(UPLOAD_DIR, uploaded_file.filename)
-    
-    with open(file_path, "wb") as file:
-        file.write(uploaded_file.file.read())
-
-    # Dateiinhalt als String lesen
-    with open(file_path, "r", encoding="utf-8") as file:
-        content = file.read()
-
-    return content
+prompt_handler = PromptHandler()
 
 @app.post("/generate-skill/")
 async def generate_skill(language: str = Form(...), 
                         framework: str = Form(...), 
                         resource_type: str = Form(...),
-                        context_file: UploadFile = File(...),
+                        context_file: UploadFile = File(None),
+                        context_name: str = Form(...),
                         ontology_file: UploadFile = File(...) 
                         ):
     """
     Endpoint for code generation from an OWL capability ontology.
     """
 
-    # Save and read uploaded files
-    context = save_uploaded_file(context_file)
-    ontology = save_uploaded_file(ontology_file)
+    # Check if a new context file is given 
+    if context_file:
+        context = await context_file.read()
+        context = context.decode("utf-8")
+
+        # Set the context handler based on the framework
+        if framework == "ROS2":
+            control_entities_handler[context_name] = ROS2ReportHandling(context, framework, resource_type, prompt_handler)
+        else:
+            raise HTTPException(status_code=400, detail=f"Unsupported framework: {framework}")
+
+    # Use the existing context handler if it exists
+    else:
+        if context_name not in control_entities_handler:
+            raise HTTPException(status_code=400, detail=f"Context handler for '{context_name}' not found.")
+        context = control_entities_handler[context_name]
+
+    # Read ontology file 
+    ontology = await ontology_file.read()
+    ontology = ontology.decode("utf-8")
 
     # Call code generation via cap2skill
-    cap2skill = Cap2Skill(language, framework, resource_type, context, ontology)
+    cap2skill = Cap2Skill(language, ontology, control_entities_handler[context_name], prompt_handler)
     llm_answer: BaseMessage = cap2skill.generate_skill_code()
 
     return {"skill_code": llm_answer.content}
-
 
 def run(): 
     uvicorn.run(app, host="0.0.0.0", port=8000)
