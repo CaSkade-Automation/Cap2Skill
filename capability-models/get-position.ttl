@@ -40,7 +40,8 @@ GetPosition:Get-Position rdf:type owl:NamedIndividual ,
 					VDI3682:hasOutput GetPosition:Get-Position_Out_Position ;
 					CSS:isRestrictedBy GetPosition:Get-Position_Constraint_X ,
 							GetPosition:Get-Position_Constraint_Y ;
-					CSS:requiresCapability GetPosition:Get-Position .
+					CSS:requiresCapability GetPosition:Get-Position ;
+					rdfs:comment "I am a get-position capability that retrieves the mobile robot's position in x and y coordinates." .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Constraint_X

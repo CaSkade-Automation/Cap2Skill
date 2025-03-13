@@ -41,7 +41,8 @@ NavToPoint:Navigate-To-Point rdf:type owl:NamedIndividual ,
 					VDI3682:hasOutput NavToPoint:Navigate-To-Point_Out_Position ;
 					CSS:isRestrictedBy NavToPoint:Navigate-To-Point_Constraint_X ,
 							NavToPoint:Navigate-To-Point_Constraint_Y ;
-					CSS:requiresCapability NavToPoint:Navigate-To-Point .
+					CSS:requiresCapability NavToPoint:Navigate-To-Point ;
+					rdfs:comment "I am a nagivate-to-point capability that navigates the mobile robot to a desired goal point with specified x and y coordinate." .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/nagivate-to-point#Navigate-To-Point_Constraint_X

@@ -33,7 +33,8 @@ Rotate:Rotate rdf:type owl:NamedIndividual ,
 					VDI3682:hasInput Rotate:Rotate_Input_Degree ;
 					VDI3682:hasOutput Rotate:Rotate_Output_Degree ;
 					CSS:isRestrictedBy Rotate:Rotate_Degree_Constraint ;
-					CSS:requiresCapability Rotate:Rotate .
+					CSS:requiresCapability Rotate:Rotate ;
+					rdfs:comment "I am a rotate capability that sets the mobile robot's angular velocity based on a desired degree of orientation. The angular velocity is maintained until the desired orientation is reached and then set to zero to stop the mobile robot." .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Degree_Constraint

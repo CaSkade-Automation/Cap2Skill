@@ -33,7 +33,8 @@ SetVelocity:Set-Velocity rdf:type owl:NamedIndividual ,
 					VDI3682:hasInput SetVelocity:Set-Velocity_Input ;
 					VDI3682:hasOutput SetVelocity:Set-Velocity_Output ;
 					CSS:isRestrictedBy SetVelocity:Set-Velocity_Constraint ;
-					CSS:requiresCapability SetVelocity:Set-Velocity .
+					CSS:requiresCapability SetVelocity:Set-Velocity ;
+					rdfs:comment "I am a set-velocity capability that sets the mobile robot's velocity in the forward direction to a desired velocity" .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/set-velocity#Set-Velocity_Constraint

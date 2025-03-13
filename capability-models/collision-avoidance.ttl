@@ -59,7 +59,8 @@ CollisionAvoidance:Collision-Avoidance rdf:type owl:NamedIndividual ,
 							CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance , 
 							CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree ;
 					CSS:isRestrictedBy CollisionAvoidance:Collision-Avoidance_Constraint_Time ;
-					CSS:requiresCapability CollisionAvoidance:Collision-Avoidance .
+					CSS:requiresCapability CollisionAvoidance:Collision-Avoidance ;
+					rdfs:comment "I am a collision-avoidance capability that sets the mobile robot's velocity in forward, sideways, or turning direction to a desired velocity for a desired time. If the distance to an obstacle detected by a LiDAR sensor falls below a desired minimum threshold or the desired time elapses, the mobile robot stops, and all velocities are set to zero." .
 													  													  
 													  
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Constraint_Time

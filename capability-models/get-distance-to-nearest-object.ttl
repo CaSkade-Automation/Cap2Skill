@@ -39,7 +39,8 @@ DistToObj:Get-Distance-To-Nearest-Object rdf:type owl:NamedIndividual ,
 							CaSk:ProvidedCapability ;
 					VDI3682:hasOutput DistToObj:Get-Distance-To-Nearest-Object_Out_Distance ,
 							DistToObj:Get-Distance-To-Nearest-Object_Out_Degree ;
-					CSS:requiresCapability DistToObj:Get-Distance-To-Nearest-Object .
+					CSS:requiresCapability DistToObj:Get-Distance-To-Nearest-Object ;
+					rdfs:comment "I am a get-distance-to-nearest-object capability that retrieves the distance and orientation to the mobile robot's nearest object using LiDAR sensor data." .
 													  
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Distance

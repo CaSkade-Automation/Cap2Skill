@@ -51,7 +51,8 @@ MoveForward:Move-Forward rdf:type owl:NamedIndividual ,
 							MoveForward:Move-Forward_Output_Velocity ;
 					CSS:isRestrictedBy MoveForward:Move-Forward_Constraint_Distance_Out ,
 							MoveForward:Move-Forward_Constraint_Time_Out ;
-					CSS:requiresCapability MoveForward:Move-Forward .
+					CSS:requiresCapability MoveForward:Move-Forward ;
+					rdfs:comment "I am a move-forward capability that sets the mobile robot's velocity in the forward direction based on a desired distance and travel time. This velocity is maintained for the desired time to cover the desired distance and then set to zero to stop the mobile robot." .
 
 
 ###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-forward#Move-Forward_Constraint_Distance_Out
