@@ -1,5 +1,6 @@
 import os
 import getpass
+import logging
 from enum import Enum
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
@@ -26,6 +27,7 @@ def get_prompt_type(file_name: str) -> PromptType:
 
 class PromptHandler():
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
         self.prompt_templates = self.generate_prompt_templates()
         
         load_dotenv()
@@ -33,10 +35,12 @@ class PromptHandler():
         if not os.environ.get("OPENAI_API_KEY"):
             os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter OpenAI API key: ")
 
+        self.logger.info("Loaded OpenAI API key.")
         self.llm = init_chat_model('gpt-4', model_provider='openai', temperature=0)
-
+        self.logger.info("Loaded LLM model: gpt-4")
 
     def generate_prompt_templates(self) -> Dict[PromptType, ChatPromptTemplate]:
+        self.logger.info("Preparing prompt templates.")
         prompt_dir = os.path.join(BASE_DIR, "../../prompt-templates")
         prompt_files = os.listdir(prompt_dir)
 
@@ -60,10 +64,12 @@ class PromptHandler():
                 [("system", system_prompt_template), ('user', user_prompt_template)]
             )
             prompt_templates[prompt_type] = prompt_template
+            self.logger.info(f"Loaded prompt template for {prompt_type}")
         
         return prompt_template
         
     def prompt(self, prompt_type: PromptType, variables: dict[str, str]) -> BaseMessage:
+        self.logger.info(f"Prompting for {prompt_type}")
         prompt_template = self.prompt_templates[prompt_type]
         prompt = prompt_template.invoke(variables)
         answer = self.llm.invoke(prompt)
