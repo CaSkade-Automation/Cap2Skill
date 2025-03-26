@@ -27,7 +27,7 @@ def get_prompt_type(file_name: str) -> PromptType:
 
 class PromptHandler():
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(__name__.split(".")[-1])
         self.prompt_templates = self.generate_prompt_templates()
         
         load_dotenv()
