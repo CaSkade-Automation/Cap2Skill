@@ -1,5 +1,6 @@
 import json
 from report_handling.control_report_handling import ControlReportHandling, ControlEntity
+from report_handling.ros2_report_generation import generate_report
 from prompt_handling.prompt_handling import PromptHandler
 from typing import Optional, List
 
@@ -30,25 +31,52 @@ class ROS2ControlEntity(ControlEntity):
 
 
 class ROS2ReportHandling(ControlReportHandling): 
-    def __init__(self, ros2_report: str, framework: str, resource_type: str, prompt_handler: PromptHandler):
-        super().__init__(ros2_report, framework, resource_type, prompt_handler)
+    def __init__(self, framework: str, resource_type: str, prompt_handler: PromptHandler, ros2_report: str = ""):
+        super().__init__(framework, resource_type, prompt_handler, ros2_report)
+
+    def generate_report(self) -> str:
+        """ Generate ROS2 system report. """
+        self.logger.info("Start generating ROS2 system report.")
+        return generate_report()
 
     def parse_report(self) -> None:
-        """ Parse ROS2 system report and return relevant parts. """
+        """
+        Parse a ROS2 system report and extract relevant information.
+        This method processes a JSON-formatted ROS2 system report, extracting
+        control entities and their associated interfaces. The extracted entities
+        are stored in the `control_entities` attribute.
+        Steps:
+        1. Logs the start of the parsing process.
+        2. Validates the presence of the "ros2_control_entities" section in the report.
+        3. Iterates through the entities, extracting their name, type, interfaces,
+            and optional description.
+        4. Creates `ROS2ControlEntity` objects for each entity and appends them
+            to the `control_entities` list.
+        5. Logs the total number of entities loaded.
+        Returns:
+            None
+        Logs:
+            - Info: Start and end of the parsing process, and details of each entity being parsed.
+            - Error: If the report format is invalid or missing required sections.
+        Raises:
+            None
+        """
+        self.logger.info("Start parsing ROS2 system report.")
         ros2_report_json = json.loads(self.report)
 
         if "ros2_control_entities" not in ros2_report_json:
-            print("Invalid report format: Missing 'ros2_control_entities' section.")
+            self.logger.error("Invalid report format: Missing 'ros2_control_entities' section.")
             return
         
         for entities in ros2_report_json["ros2_control_entities"].values():
             for entity in entities:
+                self.logger.info(f"Parsing entity: {entity['name']}")
                 interfaces = [ROS2Interface(interface["name"], interface["details"]) for interface in entity["interfaces"]]
                 description = entity["description"] if "description" in entity else ""
                 ros2_entity = ROS2ControlEntity(entity["name"], entity["type"], interfaces, description)
                 self.control_entities.append(ros2_entity)
 
-        print(f"Loaded {len(self.control_entities)} ROS2 entities from report.")
+        self.logger.info(f"Loaded {len(self.control_entities)} ROS2 entities from report.")
 
     def get_control_entities(self) -> list[ROS2ControlEntity]:
         return self.control_entities

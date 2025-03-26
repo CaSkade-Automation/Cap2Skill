@@ -44,6 +44,7 @@ class ControlEntity(ABC):
     
     def set_description(self, description: str):
         self.description = description
+        self.logger.info(f"Description set for {self.name}")
 
     def to_dict(self, include: Optional[List[str]] = None) -> dict:
         control_entity_dict = {
