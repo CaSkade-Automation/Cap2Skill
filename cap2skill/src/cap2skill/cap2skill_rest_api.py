@@ -1,5 +1,8 @@
 import uvicorn
-from fastapi import FastAPI, UploadFile, Form, File, HTTPException
+import uuid
+import os
+from fastapi import FastAPI, UploadFile, Form, File, HTTPException, BackgroundTasks
+from fastapi.responses import FileResponse
 from typing import Dict
 from langchain_core.messages import BaseMessage
 from report_handling.control_report_handling import ControlReportHandling
@@ -13,6 +16,28 @@ app = FastAPI(title="Capability to Skill Generation with LLMs", version="1.0")
 control_entities_handler: Dict[str, ControlReportHandling] = {}
 
 prompt_handler = PromptHandler()
+
+@app.post("/generate-system-report/")
+async def generate_system_report(background_tasks: BackgroundTasks, 
+                                framework: str = Form(...), 
+                                resource_type: str = Form(...), ):
+    """
+    Endpoint for generating a system report.
+    """
+
+    # Set the context handler based on the framework
+    if framework == "ROS2":
+        ros2_report_handling = ROS2ReportHandling(framework, resource_type, prompt_handler)
+    else:
+        raise HTTPException(status_code=400, detail=f"Unsupported framework: {framework}")
+    
+    file_name = f"temp_{uuid.uuid4()}.json"
+    with open(file_name, "w") as file:
+        file.write(ros2_report_handling.to_json())
+
+    background_tasks.add_task(os.remove, file_name) 
+    
+    return FileResponse(file_name, media_type="application/json", filename="api_documentation.json", background=background_tasks)
 
 @app.post("/generate-skill/")
 async def generate_skill(language: str = Form(...), 
