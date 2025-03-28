@@ -1,0 +1,46 @@
+[
+    {
+        "name": "/odom",
+        "type": "topic",
+        "description": "Purpose of the ROS2 Element:\n    - The `/odom` topic provides an estimate of a mobile robot's position and velocity in free space. It is typically used for navigation and localization tasks, offering data on the robot's pose and twist relative to a specified coordinate frame.\n\nMobile Robot Module:\n    - This element relates to the Localization and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/odom` topic is crucial for solving problems related to tracking the robot's movement and position over time. It is commonly used in scenarios requiring precise navigation, such as path planning and obstacle avoidance.\n\nUsage in the ROS2 System:\n    - It is suitable for tasks involving robot localization, such as integrating with SLAM (Simultaneous Localization and Mapping) systems, and is often used by nodes that perform path planning or motion control.",
+        "interfaces": [
+            {
+                "name": "nav_msgs/msg/Odometry",
+                "details": "# This represents an estimate of a position and velocity in free space.\n# The pose in this message should be specified in the coordinate frame given by header.frame_id\n# The twist in this message should be specified in the coordinate frame given by the child_frame_id\n\n# Includes the frame id of the pose parent.\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\n# Frame id the pose points to. The twist is in this coordinate frame.\nstring child_frame_id\n\n# Estimated pose that is typically relative to a fixed world frame.\ngeometry_msgs/PoseWithCovariance pose\n\tPose pose\n\t\tPoint position\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion orientation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\tfloat64[36] covariance\n\n# Estimated linear and angular velocity relative to child_frame_id.\ngeometry_msgs/TwistWithCovariance twist\n\tTwist twist\n\t\tVector3  linear\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tVector3  angular\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\tfloat64[36] covariance"
+            }
+        ]
+    },
+    {
+        "name": "/scan",
+        "type": "topic",
+        "description": "Purpose of the ROS2 Element:\n    - The `/scan` topic provides data from a laser range-finder sensor, delivering a series of distance measurements and intensities. It is typically used for obstacle detection, mapping, and navigation.\n\nMobile Robot Module:\n    - This element relates to the Perception and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/scan` topic is crucial for tasks such as obstacle avoidance, environment mapping, and path planning. It helps in detecting obstacles and understanding the robot's surroundings.\n\nUsage in the ROS2 System:\n    - It is commonly used in SLAM (Simultaneous Localization and Mapping) applications, autonomous navigation, and collision avoidance systems. Nodes like `move_base` and `amcl` often subscribe to this topic to perform their functions.",
+        "interfaces": [
+            {
+                "name": "sensor_msgs/msg/LaserScan",
+                "details": "# Single scan from a planar laser range-finder\n#\n# If you have another ranging device with different behavior (e.g. a sonar\n# array), please find or create a different message, since applications\n# will make fairly laser-specific assumptions about this data\n\nstd_msgs/Header header # timestamp in the header is the acquisition time of\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n                             # the first ray in the scan.\n                             #\n                             # in frame frame_id, angles are measured around\n                             # the positive Z axis (counterclockwise, if Z is up)\n                             # with zero angle being forward along the x axis\n\nfloat32 angle_min            # start angle of the scan [rad]\nfloat32 angle_max            # end angle of the scan [rad]\nfloat32 angle_increment      # angular distance between measurements [rad]\n\nfloat32 time_increment       # time between measurements [seconds] - if your scanner\n                             # is moving, this will be used in interpolating position\n                             # of 3d points\nfloat32 scan_time            # time between scans [seconds]\n\nfloat32 range_min            # minimum range value [m]\nfloat32 range_max            # maximum range value [m]\n\nfloat32[] ranges             # range data [m]\n                             # (Note: values < range_min or > range_max should be discarded)\nfloat32[] intensities        # intensity data [device-specific units].  If your\n                             # device does not provide intensities, please leave\n                             # the array empty."
+            }
+        ]
+    },
+    {
+        "name": "/scan2",
+        "type": "topic",
+        "description": "Purpose of the ROS2 Element:\n    - The \"/scan2\" topic publishes data from a laser range-finder sensor, providing information about the surrounding environment in the form of distance measurements. It is typically used for obstacle detection and navigation.\n\nMobile Robot Module:\n    - This ROS2 element relates to the Perception and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The \"/scan2\" topic is crucial for tasks such as mapping, localization, and collision avoidance. It helps in creating a map of the environment and detecting obstacles to navigate safely.\n\nUsage in the ROS2 System:\n    - It is commonly used in SLAM (Simultaneous Localization and Mapping) applications, autonomous navigation, and path planning tasks. Nodes like \"move_base\" or \"amcl\" often subscribe to this topic to perform their functions.",
+        "interfaces": [
+            {
+                "name": "sensor_msgs/msg/LaserScan",
+                "details": "# Single scan from a planar laser range-finder\n#\n# If you have another ranging device with different behavior (e.g. a sonar\n# array), please find or create a different message, since applications\n# will make fairly laser-specific assumptions about this data\n\nstd_msgs/Header header # timestamp in the header is the acquisition time of\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n                             # the first ray in the scan.\n                             #\n                             # in frame frame_id, angles are measured around\n                             # the positive Z axis (counterclockwise, if Z is up)\n                             # with zero angle being forward along the x axis\n\nfloat32 angle_min            # start angle of the scan [rad]\nfloat32 angle_max            # end angle of the scan [rad]\nfloat32 angle_increment      # angular distance between measurements [rad]\n\nfloat32 time_increment       # time between measurements [seconds] - if your scanner\n                             # is moving, this will be used in interpolating position\n                             # of 3d points\nfloat32 scan_time            # time between scans [seconds]\n\nfloat32 range_min            # minimum range value [m]\nfloat32 range_max            # maximum range value [m]\n\nfloat32[] ranges             # range data [m]\n                             # (Note: values < range_min or > range_max should be discarded)\nfloat32[] intensities        # intensity data [device-specific units].  If your\n                             # device does not provide intensities, please leave\n                             # the array empty."
+            }
+        ]
+    },
+    {
+        "name": "/controller_manager/list_hardware_interfaces",
+        "type": "service",
+        "description": "Purpose of the ROS2 Element:\n   - The `/controller_manager/list_hardware_interfaces` service provides a list of available hardware interfaces on a robot. It is typically used to query the status of command and state interfaces, including their availability and whether they are claimed by a controller.\n\nMobile Robot Module:\n   - This service relates to the hardware interface module of a mobile robot, which includes actuators and sensors.\n\nRelevance for Specific Tasks:\n   - This service is crucial for managing and monitoring the hardware interfaces of a robot, ensuring that the necessary interfaces are available and properly claimed for control tasks. It is particularly useful in scenarios where dynamic reconfiguration or verification of hardware resources is required.\n\nUsage in the ROS2 System:\n   - It is suitable for tasks such as initializing controllers, verifying hardware setup, and dynamically managing hardware resources in a ROS2-based robotic system.",
+        "interfaces": [
+            {
+                "name": "controller_manager_msgs/srv/ListHardwareInterfaces",
+                "details": "---\nHardwareInterface[] command_interfaces\n\tstring name\n\tbool is_available\n\tbool is_claimed\nHardwareInterface[] state_interfaces\n\tstring name\n\tbool is_available\n\tbool is_claimed"
+            }
+        ]
+    }
+]
