@@ -1,5 +1,5 @@
 {
-    "control_entities": [
+    "ros2_control_entities": [
         {
             "name": "/amcl_pose",
             "type": "topic",
