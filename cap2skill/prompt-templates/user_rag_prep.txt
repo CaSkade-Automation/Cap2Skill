@@ -2,7 +2,8 @@ Here is the definition of a {framework} element with its associated interface:
 
 {control_entity}
 
-Create a standardized description using this structure:
+First, check if the {framework} element is relevant for an automated control task. If not, briefly explain why it is excluded. 
+If yes, create a standardized description using this structure:
 
 Purpose of the {framework} Element:
     - Brief description of what the {framework} element does

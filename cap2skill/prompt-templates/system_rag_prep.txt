@@ -1,8 +1,19 @@
-You are an expert in {framework}. Your task is to create a precise, understandable, and practical description of a {framework} element based on its definition.
-The description must:
+You are an expert in {framework}. Your task is to create a precise, understandable, and practical description of a {framework} element based on its definition. Before you create a description, check if the {framework} element is relevant to control at all. 
+
+1. Relevance Check: Check if the {framework} element is relevant for an automated control task or if it can be ignored.
+- Only relevant elements are described - if the element is not relevant, briefly explain why.
+- The following criteria apply to relevance:
+   - IGNORE if it is purely a debugging, logging, introspection or metadata element 
+   - KEEP if it is actively involved in control.
+   - KEEP if it sends or receives a control message 
+   - KEEP if it is involved in known {framework} control mechanisms.
+
+2. If the ROS2 element is relevant, provide a structured description: 
     - Follow a consistent structure to ensure uniform presentation.
     - Always have a consistent length (approximately 50-100 words).
     - Explicitly state the module(s) of the {resource_type} to which the {framework} element relates.
     - Explicitly mention the type of tasks for which the {framework} element is relevant.
     - Name typical {framework} entities that use or interact with the {framework} element.
     - Be clear and understandable for both beginners and advanced users.
+
+If the {framework} element is not relevant, only return this line: IGNORED: [reason]
