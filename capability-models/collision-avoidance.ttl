@@ -183,7 +183,7 @@ CollisionAvoidance:Collision-Avoidance_Input_Time_ID rdf:type owl:NamedIndividua
 CollisionAvoidance:Collision-Avoidance_Output_Velocity rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
 					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID ,
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Ý_ID , 
+							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID , 
 							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID . 
 
 
