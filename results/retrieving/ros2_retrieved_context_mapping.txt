@@ -1,0 +1,42 @@
+[
+    {
+        "name": "/map",
+        "type": "topic",
+        "interfaces": [
+            {
+                "name": "nav_msgs/msg/OccupancyGrid",
+                "details": "# This represents a 2-D grid map\nstd_msgs/Header header\n\tbuiltin_interfaces/Time stamp\n\t\tint32 sec\n\t\tuint32 nanosec\n\tstring frame_id\n\n# MetaData for the map\nMapMetaData info\n\tbuiltin_interfaces/Time map_load_time\n\t\tint32 sec\n\t\tuint32 nanosec\n\tfloat32 resolution\n\tuint32 width\n\tuint32 height\n\tgeometry_msgs/Pose origin\n\t\tPoint position\n\t\t\tfloat64 x\n\t\t\tfloat64 y\n\t\t\tfloat64 z\n\t\tQuaternion orientation\n\t\t\tfloat64 x 0\n\t\t\tfloat64 y 0\n\t\t\tfloat64 z 0\n\t\t\tfloat64 w 1\n\n# The map data, in row-major order, starting with (0,0).\n# Cell (1, 0) will be listed second, representing the next cell in the x direction.\n# Cell (0, 1) will be at the index equal to info.width, followed by (1, 1).\n# The values inside are application dependent, but frequently,\n# 0 represents unoccupied, 1 represents definitely occupied, and\n# -1 represents unknown.\nint8[] data"
+            }
+        ]
+    },
+    {
+        "name": "/map_metadata",
+        "type": "topic",
+        "interfaces": [
+            {
+                "name": "nav_msgs/msg/MapMetaData",
+                "details": "# This hold basic information about the characteristics of the OccupancyGrid\n\n# The time at which the map was loaded\nbuiltin_interfaces/Time map_load_time\n\tint32 sec\n\tuint32 nanosec\n\n# The map resolution [m/cell]\nfloat32 resolution\n\n# Map width [cells]\nuint32 width\n\n# Map height [cells]\nuint32 height\n\n# The origin of the map [m, m, rad].  This is the real-world pose of the\n# bottom left corner of cell (0,0) in the map.\ngeometry_msgs/Pose origin\n\tPoint position\n\t\tfloat64 x\n\t\tfloat64 y\n\t\tfloat64 z\n\tQuaternion orientation\n\t\tfloat64 x 0\n\t\tfloat64 y 0\n\t\tfloat64 z 0\n\t\tfloat64 w 1"
+            }
+        ]
+    },
+    {
+        "name": "/slam_toolbox/deserialize_map",
+        "type": "service",
+        "interfaces": [
+            {
+                "name": "slam_toolbox/srv/DeserializePoseGraph",
+                "details": "int8 UNSET = 0\nint8 START_AT_FIRST_NODE = 1\nint8 START_AT_GIVEN_POSE = 2\nint8 LOCALIZE_AT_POSE = 3\n\n# inital_pose should be Map -> base_frame (parameter, generally base_link)\n#\n\nstring filename\nint8 match_type\ngeometry_msgs/Pose2D initial_pose\n\tfloat64 x\n\tfloat64 y\n\tfloat64 theta\n---"
+            }
+        ]
+    },
+    {
+        "name": "/slam_toolbox/dynamic_map",
+        "type": "service",
+        "interfaces": [
+            {
+                "name": "nav_msgs/srv/GetMap",
+                "details": "# Get the map as a nav_msgs/OccupancyGrid\n---\n# The current map hosted by this map service.\nOccupancyGrid map\n\tstd_msgs/Header header\n\t\tbuiltin_interfaces/Time stamp\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tstring frame_id\n\tMapMetaData info\n\t\tbuiltin_interfaces/Time map_load_time\n\t\t\tint32 sec\n\t\t\tuint32 nanosec\n\t\tfloat32 resolution\n\t\tuint32 width\n\t\tuint32 height\n\t\tgeometry_msgs/Pose origin\n\t\t\tPoint position\n\t\t\t\tfloat64 x\n\t\t\t\tfloat64 y\n\t\t\t\tfloat64 z\n\t\t\tQuaternion orientation\n\t\t\t\tfloat64 x 0\n\t\t\t\tfloat64 y 0\n\t\t\t\tfloat64 z 0\n\t\t\t\tfloat64 w 1\n\tint8[] data"
+            }
+        ]
+    }
+]

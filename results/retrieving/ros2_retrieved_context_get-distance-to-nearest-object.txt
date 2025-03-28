@@ -2,7 +2,6 @@
     {
         "name": "/odom",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/odom` topic provides an estimate of a mobile robot's position and velocity in free space. It is typically used for navigation and localization tasks, offering data on the robot's pose and twist relative to a specified coordinate frame.\n\nMobile Robot Module:\n    - This element relates to the Localization and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/odom` topic is crucial for solving problems related to tracking the robot's movement and position over time. It is commonly used in scenarios requiring precise navigation, such as path planning and obstacle avoidance.\n\nUsage in the ROS2 System:\n    - It is suitable for tasks involving robot localization, such as integrating with SLAM (Simultaneous Localization and Mapping) systems, and is often used by nodes that perform path planning or motion control.",
         "interfaces": [
             {
                 "name": "nav_msgs/msg/Odometry",
@@ -13,7 +12,6 @@
     {
         "name": "/scan",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/scan` topic provides data from a laser range-finder sensor, delivering a series of distance measurements and intensities. It is typically used for obstacle detection, mapping, and navigation.\n\nMobile Robot Module:\n    - This element relates to the Perception and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/scan` topic is crucial for tasks such as obstacle avoidance, environment mapping, and path planning. It helps in detecting obstacles and understanding the robot's surroundings.\n\nUsage in the ROS2 System:\n    - It is commonly used in SLAM (Simultaneous Localization and Mapping) applications, autonomous navigation, and collision avoidance systems. Nodes like `move_base` and `amcl` often subscribe to this topic to perform their functions.",
         "interfaces": [
             {
                 "name": "sensor_msgs/msg/LaserScan",
@@ -24,7 +22,6 @@
     {
         "name": "/scan2",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The \"/scan2\" topic publishes data from a laser range-finder sensor, providing information about the surrounding environment in the form of distance measurements. It is typically used for obstacle detection and navigation.\n\nMobile Robot Module:\n    - This ROS2 element relates to the Perception and Navigation modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The \"/scan2\" topic is crucial for tasks such as mapping, localization, and collision avoidance. It helps in creating a map of the environment and detecting obstacles to navigate safely.\n\nUsage in the ROS2 System:\n    - It is commonly used in SLAM (Simultaneous Localization and Mapping) applications, autonomous navigation, and path planning tasks. Nodes like \"move_base\" or \"amcl\" often subscribe to this topic to perform their functions.",
         "interfaces": [
             {
                 "name": "sensor_msgs/msg/LaserScan",
@@ -35,7 +32,6 @@
     {
         "name": "/controller_manager/list_hardware_interfaces",
         "type": "service",
-        "description": "Purpose of the ROS2 Element:\n   - The `/controller_manager/list_hardware_interfaces` service provides a list of available hardware interfaces on a robot. It is typically used to query the status of command and state interfaces, including their availability and whether they are claimed by a controller.\n\nMobile Robot Module:\n   - This service relates to the hardware interface module of a mobile robot, which includes actuators and sensors.\n\nRelevance for Specific Tasks:\n   - This service is crucial for managing and monitoring the hardware interfaces of a robot, ensuring that the necessary interfaces are available and properly claimed for control tasks. It is particularly useful in scenarios where dynamic reconfiguration or verification of hardware resources is required.\n\nUsage in the ROS2 System:\n   - It is suitable for tasks such as initializing controllers, verifying hardware setup, and dynamically managing hardware resources in a ROS2-based robotic system.",
         "interfaces": [
             {
                 "name": "controller_manager_msgs/srv/ListHardwareInterfaces",

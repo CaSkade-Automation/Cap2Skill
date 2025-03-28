@@ -2,7 +2,6 @@
     {
         "name": "/clicked_point",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/clicked_point` topic is used to publish a point in 3D space that has been selected or clicked by a user, typically in a graphical interface. It is used to communicate the coordinates of a point of interest.\n\nMobile Robot Module:\n    - This element relates to the navigation and perception modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - It can be used to set target points for navigation or to mark areas of interest for further inspection. It is particularly useful in tasks where user interaction is required to specify locations, such as in teleoperation or interactive mapping.\n\nUsage in the ROS2 System:\n    - Suitable for tasks like interactive navigation where a user clicks on a map to set a destination, or in robot-assisted surveying where specific points need to be marked for data collection.",
         "interfaces": [
             {
                 "name": "geometry_msgs/msg/PointStamped",
@@ -13,7 +12,6 @@
     {
         "name": "/goal_pose",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/goal_pose` topic is used to specify a target position and orientation for a mobile robot. It provides a `PoseStamped` message that includes a reference coordinate frame and a timestamp, which is essential for navigation tasks.\n\nMobile Robot Module:\n    - This element relates to the navigation and path planning modules of a mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/goal_pose` topic is crucial for tasks involving autonomous navigation, where the robot needs to move to a specific location. It is used in scenarios such as waypoint navigation, obstacle avoidance, and path following.\n\nUsage in the ROS2 System:\n    - It is typically used by navigation stacks like `nav2` to receive goal positions from higher-level applications or user interfaces, enabling the robot to plan and execute a path to the desired location.",
         "interfaces": [
             {
                 "name": "geometry_msgs/msg/PoseStamped",
@@ -24,7 +22,6 @@
     {
         "name": "/navigate_through_poses",
         "type": "action",
-        "description": "Purpose of the ROS2 Element:\n    - The `/navigate_through_poses` action is used to command a mobile robot to navigate through a series of predefined poses. It is typically used for path planning and execution in environments where the robot needs to follow a specific route.\n\nMobile Robot Module:\n    - This ROS2 element relates to the navigation module of a mobile robot.\n\nRelevance for Specific Tasks:\n    - This element is crucial for tasks involving autonomous navigation, such as moving through a warehouse or navigating a predefined path in a structured environment. It helps solve problems related to path following and obstacle avoidance.\n\nUsage in the ROS2 System:\n    - It is suitable for use in ROS2 navigation stacks, such as Nav2, where it interacts with planners and controllers to achieve smooth and efficient navigation through multiple waypoints.",
         "interfaces": [
             {
                 "name": "nav2_msgs/action/NavigateThroughPoses",
@@ -35,7 +32,6 @@
     {
         "name": "/navigate_to_pose",
         "type": "action",
-        "description": "Purpose of the ROS2 Element:\n    - The `/navigate_to_pose` action is used to command a mobile robot to move to a specified pose in the environment. It is typically used for navigation tasks where precise positioning is required.\n\nMobile Robot Module:\n    - This ROS2 element relates to the navigation module of a mobile robot.\n\nRelevance for Specific Tasks:\n    - It solves the problem of autonomous navigation by allowing the robot to reach a target location. Typical scenarios include moving to a specific point in a map for tasks like delivery, inspection, or exploration.\n\nUsage in the ROS2 System:\n    - Suitable for tasks involving autonomous navigation, such as in the Navigation2 stack, where it interacts with planners and controllers to achieve the desired pose.",
         "interfaces": [
             {
                 "name": "nav2_msgs/action/NavigateToPose",
