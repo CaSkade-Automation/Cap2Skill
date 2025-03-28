@@ -61,6 +61,7 @@ class ROS2ReportHandling(ControlReportHandling):
         Raises:
             None
         """
+        # TODO: make function flexible for different report formats
         self.logger.info("Start parsing ROS2 system report.")
         ros2_report_json = json.loads(self.report)
 
@@ -68,13 +69,12 @@ class ROS2ReportHandling(ControlReportHandling):
             self.logger.error("Invalid report format: Missing 'ros2_control_entities' section.")
             return
         
-        for entities in ros2_report_json["ros2_control_entities"].values():
-            for entity in entities:
-                self.logger.info(f"Parsing entity: {entity['name']}")
-                interfaces = [ROS2Interface(interface["name"], interface["details"]) for interface in entity["interfaces"]]
-                description = entity["description"] if "description" in entity else ""
-                ros2_entity = ROS2ControlEntity(entity["name"], entity["type"], interfaces, description)
-                self.control_entities.append(ros2_entity)
+        for entity in ros2_report_json["ros2_control_entities"]:
+            self.logger.info(f"Parsing entity: {entity['name']}")
+            interfaces = [ROS2Interface(interface["name"], interface["details"]) for interface in entity["interfaces"]]
+            description = entity["description"] if "description" in entity else ""
+            ros2_entity = ROS2ControlEntity(entity["name"], entity["type"], interfaces, description)
+            self.control_entities.append(ros2_entity)
 
         self.logger.info(f"Loaded {len(self.control_entities)} ROS2 entities from report.")
 
