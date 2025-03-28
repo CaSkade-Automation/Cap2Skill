@@ -1,7 +1,7 @@
 import json
 import logging
 from abc import ABC, abstractmethod
-from typing import Optional, List
+from typing import Optional, List, Union
 from prompt_handling.prompt_handling import PromptType, PromptHandler
 
 class ControlEntity(ABC):
@@ -95,7 +95,7 @@ class ControlReportHandling(ABC):
             Converts the control report and its entities into a JSON string representation. 
             Optionally includes only specified keys.
     """
-    def __init__(self, framework: str, resource_type: str, prompt_handler: PromptHandler, report: str = ""):
+    def __init__(self, framework: str, resource_type: str, prompt_handler: PromptHandler, report: Union[str, dict]  = ""):
         self.framework = framework
         self.resource_type = resource_type
         self.prompt_handler = prompt_handler

@@ -48,9 +48,11 @@ def generate_report() -> str:
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     report = {"timestamp": timestamp, "ros2_control_entities": {}}  
     
+    report["ros2_control_entities"] =[] 
+
     for comm_type in Communication:
         comm_list = get_stable_communications(node, comm_type)
-        report["ros2_entities"][comm_type.value] = write_interface_details(comm_list, comm_type.value[:-1])
+        report["ros2_control_entities"].extend(write_interface_details(comm_list, comm_type.value[:-1]))
     
     node.destroy_node()
     rclpy.shutdown()
