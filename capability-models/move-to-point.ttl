@@ -1,0 +1,246 @@
+@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix openmath: <http://openmath.org/vocab/math#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
+@prefix MoveToPoint: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#> .
+@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+
+<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point> rdf:type owl:Ontology ;
+                                                                     owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Position_X_TD
+MoveToPoint:Position_X_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Position_Y_TD
+MoveToPoint:Position_Y_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the y coordinate in meters." .
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Position_Z_TD
+MoveToPoint:Position_Z_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the z coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point
+MoveToPoint:Move-To-Point rdf:type owl:NamedIndividual ,
+							VDI3682:ProcessOperator ,
+							CaSk:ProvidedCapability ;
+					VDI3682:hasInput MoveToPoint:Move-To-Point_In_Position ;		
+					VDI3682:hasOutput MoveToPoint:Move-To-Point_Out_Position ;
+					CSS:isRestrictedBy MoveToPoint:Move-To-Point_Constraint_X ,
+							MoveToPoint:Move-To-Point_Constraint_Y ,
+							MoveToPoint:Move-To-Point_Constraint_Z ;
+					CSS:requiresCapability MoveToPoint:Move-To-Point ;
+					rdfs:comment "I am a move-to-point capability that moves the manipulator of the mobile robot to a desired goal point with specified x, y and z coordinate." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Constraint_X
+MoveToPoint:Move-To-Point_Constraint_X rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (MoveToPoint:Move-To-Point_In_Position_X_ID MoveToPoint:Move-To-Point_Out_Position_X_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references MoveToPoint:Move-To-Point_In_Position_X_ID ,
+                                                      MoveToPoint:Move-To-Point_Out_Position_X_ID .
+			
+			
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Constraint_Y
+MoveToPoint:Move-To-Point_Constraint_Y rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (MoveToPoint:Move-To-Point_In_Position_Y_ID MoveToPoint:Move-To-Point_Out_Position_Y_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references MoveToPoint:Move-To-Point_In_Position_Y_ID ,
+                                                      MoveToPoint:Move-To-Point_Out_Position_Y_ID .
+													  
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Constraint_Z
+MoveToPoint:Move-To-Point_Constraint_Z rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (MoveToPoint:Move-To-Point_In_Position_Z_ID MoveToPoint:Move-To-Point_Out_Position_Z_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references MoveToPoint:Move-To-Point_In_Position_Z_ID ,
+                                                      MoveToPoint:Move-To-Point_Out_Position_Z_ID .
+													  
+													  
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position
+MoveToPoint:Move-To-Point_In_Position rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					DINEN61360:has_Data_Element MoveToPoint:Move-To-Point_In_Position_X_DE ,
+							MoveToPoint:Move-To-Point_In_Position_Y_DE ,
+							MoveToPoint:Move-To-Point_In_Position_Z_DE ;
+					VDI3682:isCharacterizedBy MoveToPoint:Move-To-Point_In_Position_X_ID ,
+							MoveToPoint:Move-To-Point_In_Position_Y_ID ,
+							MoveToPoint:Move-To-Point_In_Position_Z_ID .
+							
+							
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_X_DE
+MoveToPoint:Move-To-Point_In_Position_X_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description MoveToPoint:Move-To-Point_In_Position_X_ID ;
+					DINEN61360:has_Type_Description MoveToPoint:Position_X_TD .
+					
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_X_ID
+MoveToPoint:Move-To-Point_In_Position_X_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_X_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+					
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Y_DE
+MoveToPoint:Move-To-Point_In_Position_Y_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description MoveToPoint:Move-To-Point_In_Position_Y_ID ;
+					DINEN61360:has_Type_Description MoveToPoint:Position_Y_TD .
+					
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Y_ID
+MoveToPoint:Move-To-Point_In_Position_Y_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Y_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Z_DE
+MoveToPoint:Move-To-Point_In_Position_Z_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description MoveToPoint:Move-To-Point_In_Position_Z_ID ;
+					DINEN61360:has_Type_Description MoveToPoint:Position_Z_TD .
+					
+					
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Z_ID
+MoveToPoint:Move-To-Point_In_Position_Z_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_In_Position_Z_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position
+MoveToPoint:Move-To-Point_Out_Position rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					VDI3682:isCharacterizedBy MoveToPoint:Move-To-Point_Out_Position_X_ID ,
+							MoveToPoint:Move-To-Point_Out_Position_Y_ID ,
+							MoveToPoint:Move-To-Point_Out_Position_Z_ID .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_X_ID
+MoveToPoint:Move-To-Point_Out_Position_X_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_X_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_Y_ID
+MoveToPoint:Move-To-Point_Out_Position_Y_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_Y_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .	
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_Z_ID
+MoveToPoint:Move-To-Point_Out_Position_Z_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Move-To-Point_Out_Position_Z_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .						
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700
+MoveToPoint:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability MoveToPoint:Move-To-Point ;
+					DINEN61360:has_Data_Element MoveToPoint:Neobotix-MMO-700_UR10_Position_X_DE ,
+							MoveToPoint:Neobotix-MMO-700_UR10_Position_Y_DE ,
+							MoveToPoint:Neobotix-MMO-700_UR10_Position_Z_DE ;
+					VDI3682:isCharacterizedBy MoveToPoint:Neobotix-MMO-700_UR10_Position_X_ID ,
+							MoveToPoint:Neobotix-MMO-700_UR10_Position_Y_ID ,
+							MoveToPoint:Neobotix-MMO-700_UR10_Position_Z_ID .
+					
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_X_DE
+MoveToPoint:Neobotix-MMO-700_UR10_Position_X_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description MoveToPoint:Neobotix-MMO-700_UR10_Position_X_ID ,
+							MoveToPoint:Move-To-Point_Out_Position_X_ID ;
+                     DINEN61360:has_Type_Description MoveToPoint:Position_X_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_X_ID
+MoveToPoint:Neobotix-MMO-700_UR10_Position_X_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_X_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+					 
+					 
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Y_DE
+MoveToPoint:Neobotix-MMO-700_UR10_Position_Y_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description MoveToPoint:Neobotix-MMO-700_UR10_Position_Y_ID ,
+							MoveToPoint:Move-To-Point_Out_Position_Y_ID ;
+                     DINEN61360:has_Type_Description MoveToPoint:Position_Y_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Y_ID
+MoveToPoint:Neobotix-MMO-700_UR10_Position_Y_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Y_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+					 
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Z_DE
+MoveToPoint:Neobotix-MMO-700_UR10_Position_Z_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description MoveToPoint:Neobotix-MMO-700_UR10_Position_Z_ID ,
+							MoveToPoint:Move-To-Point_Out_Position_Z_ID ;
+                     DINEN61360:has_Type_Description MoveToPoint:Position_Z_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Z_ID
+MoveToPoint:Neobotix-MMO-700_UR10_Position_Z_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/move-to-point#Neobotix-MMO-700_UR10_Position_Z_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
