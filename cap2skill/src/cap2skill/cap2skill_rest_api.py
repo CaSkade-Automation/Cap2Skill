@@ -1,6 +1,7 @@
 import uvicorn
 import uuid
 import os
+import logging
 from fastapi import FastAPI, UploadFile, Form, File, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from typing import Dict
@@ -9,6 +10,10 @@ from report_handling.control_report_handling import ControlReportHandling
 from report_handling.ros2_handling import ROS2ReportHandling
 from prompt_handling.prompt_handling import PromptHandler
 from cap2skill import Cap2Skill
+from log_config import setup_logger
+
+setup_logger()
+logger = logging.getLogger("RestAPI")
 
 # Initialize FastAPI app
 app = FastAPI(title="Capability to Skill Generation with LLMs", version="1.0")
@@ -20,16 +25,26 @@ prompt_handler = PromptHandler()
 @app.post("/generate-system-report/")
 async def generate_system_report(background_tasks: BackgroundTasks, 
                                 framework: str = Form(...), 
-                                resource_type: str = Form(...), ):
+                                resource_type: str = Form(...),
+                                context_file: UploadFile = File(None), 
+                                context_name: str = Form(None)):
     """
     Endpoint for generating a system report.
     """
+    context = None
 
+    if context_file:
+        context = await context_file.read()
+        context = context.decode("utf-8")
+    
     # Set the context handler based on the framework
     if framework == "ROS2":
-        ros2_report_handling = ROS2ReportHandling(framework, resource_type, prompt_handler)
+        ros2_report_handling = ROS2ReportHandling(framework, resource_type, prompt_handler, context)
     else:
         raise HTTPException(status_code=400, detail=f"Unsupported framework: {framework}")
+    
+    if context_name:
+        control_entities_handler[context_name] = ros2_report_handling
     
     file_name = f"temp_{uuid.uuid4()}.json"
     with open(file_name, "w") as file:
@@ -58,7 +73,7 @@ async def generate_skill(language: str = Form(...),
 
         # Set the context handler based on the framework
         if framework == "ROS2":
-            control_entities_handler[context_name] = ROS2ReportHandling(context, framework, resource_type, prompt_handler)
+            control_entities_handler[context_name] = ROS2ReportHandling(framework, resource_type, prompt_handler, context)
         else:
             raise HTTPException(status_code=400, detail=f"Unsupported framework: {framework}")
 
