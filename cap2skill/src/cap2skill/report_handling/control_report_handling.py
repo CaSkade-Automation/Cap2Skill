@@ -143,12 +143,29 @@ class ControlReportHandling(ABC):
         self.logger.info("Generating descriptions for RAG model.")
         for control_entity in (control_entity_without_description for control_entity_without_description in self.control_entities if control_entity_without_description.get_description() == ""):
             self.logger.info(f"Generating description for {control_entity.get_name()}.")
-            control_entity_description = self.prompt_handler.prompt(PromptType.RAG_PREPARATION, {"framework": self.framework, "resource_type": self.resource_type, "control_entity": control_entity.to_json(include=["name", "type"])})
-            control_entity.set_description(control_entity_description.content)
+            llm_response = self.prompt_handler.prompt(PromptType.RAG_PREPARATION, {"framework": self.framework, "resource_type": self.resource_type, "control_entity": control_entity.to_json(include=["name", "type"])})
+            
+            if llm_response.content.startswith("IGNORED"):
+                self.logger.warning(f"{control_entity.get_name()} element excluded: {llm_response.content}")
+            else:
+                control_entity.set_description(llm_response.content)
+        
+        self.control_entities = [control_entity for control_entity in self.control_entities if control_entity.get_description() != ""]
 
     def compare_control_entity_names(self, control_entities_json: List[dict]) -> List[ControlEntity]:
         entity_names = [entity["name"] for entity in control_entities_json]
         return [control_entity for control_entity in self.control_entities if control_entity.get_name() in entity_names]
+    
+    def compare_control_entity_descriptions(self, control_entities_description: List[str]) -> List[ControlEntity]:
+        results = []
+        for control_entity in self.control_entities:
+            if control_entity.get_description() in control_entities_description:
+                results.append(control_entity)
+                if len(results) == len(control_entities_description):
+                    break
+
+        return results
+        # return [control_entity for control_entity in self.control_entities if control_entity.get_description() in control_entities_description]
     
     def get_framework(self) -> str:
         return self.framework
