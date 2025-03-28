@@ -62,8 +62,8 @@ class PromptHandler():
             os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter OpenAI API key: ")
 
         self.logger.info("Loaded OpenAI API key.")
-        self.llm = init_chat_model('gpt-4', model_provider='openai', temperature=0)
-        self.logger.info("Loaded LLM model: gpt-4")
+        self.llm = init_chat_model('gpt-4o', model_provider='openai', temperature=0)
+        self.logger.info("Loaded LLM model: gpt-4o")
 
     def generate_prompt_templates(self) -> Dict[PromptType, ChatPromptTemplate]:
         """
@@ -109,7 +109,7 @@ class PromptHandler():
             prompt_templates[prompt_type] = prompt_template
             self.logger.info(f"Loaded prompt template for {prompt_type}")
         
-        return prompt_template
+        return prompt_templates
         
     def prompt(self, prompt_type: PromptType, variables: dict[str, str]) -> BaseMessage:
         """
