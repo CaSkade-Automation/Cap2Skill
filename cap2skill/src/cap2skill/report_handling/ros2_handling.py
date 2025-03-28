@@ -2,7 +2,7 @@ import json
 from report_handling.control_report_handling import ControlReportHandling, ControlEntity
 from report_handling.ros2_report_generation import generate_report
 from prompt_handling.prompt_handling import PromptHandler
-from typing import Optional, List
+from typing import Optional, List, Union
 
 class ROS2Interface: 
     """ Class for processing ROS2 interfaces (messages, services and actions). """
@@ -31,7 +31,7 @@ class ROS2ControlEntity(ControlEntity):
 
 
 class ROS2ReportHandling(ControlReportHandling): 
-    def __init__(self, framework: str, resource_type: str, prompt_handler: PromptHandler, ros2_report: str = ""):
+    def __init__(self, framework: str, resource_type: str, prompt_handler: PromptHandler, ros2_report: Union[str, dict] = ""):
         super().__init__(framework, resource_type, prompt_handler, ros2_report)
 
     def generate_report(self) -> str:
@@ -63,7 +63,13 @@ class ROS2ReportHandling(ControlReportHandling):
         """
         # TODO: make function flexible for different report formats
         self.logger.info("Start parsing ROS2 system report.")
-        ros2_report_json = json.loads(self.report)
+
+        if isinstance(self.report, str):
+            ros2_report_json = json.loads(self.report)
+        elif isinstance(self.report, dict):
+            ros2_report_json = self.report
+        else:
+            self.logger.error("Report must be a JSON string or dict.")
 
         if "ros2_control_entities" not in ros2_report_json:
             self.logger.error("Invalid report format: Missing 'ros2_control_entities' section.")
