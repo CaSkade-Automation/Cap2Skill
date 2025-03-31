@@ -2,7 +2,6 @@
     {
         "name": "/cmd_vel",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/cmd_vel` topic is used to command the velocity of a mobile robot. It typically carries messages that specify the desired linear and angular velocities for the robot's movement.\n\nMobile Robot Module:\n    - This element relates to the motion control module of the mobile robot.\n\nRelevance for Specific Tasks:\n    - The `/cmd_vel` topic is crucial for tasks involving navigation and movement control. It allows for the implementation of path-following algorithms and obstacle avoidance by adjusting the robot's speed and direction.\n\nUsage in the ROS2 System:\n    - It is commonly used in ROS2 systems for tasks such as teleoperation, autonomous navigation, and dynamic path planning. Nodes like navigation controllers and teleoperation interfaces typically publish to this topic to control the robot's movement.",
         "interfaces": [
             {
                 "name": "geometry_msgs/msg/Twist",
@@ -13,7 +12,6 @@
     {
         "name": "/joint_trajectory_controller/joint_trajectory",
         "type": "topic",
-        "description": "Purpose of the ROS2 Element:\n    - The `/joint_trajectory_controller/joint_trajectory` topic is used to send joint trajectory commands to a robot. It specifies the desired positions, velocities, accelerations, and efforts for the robot's joints over time.\n    - It is typically used for controlling the movement of robotic arms or other jointed mechanisms.\n\nMobile Robot Module:\n    - This ROS2 element relates to the Actuation module of a mobile robot, specifically for controlling jointed components like robotic arms.\n\nRelevance for Specific Tasks:\n    - This element is crucial for tasks involving precise joint control, such as pick-and-place operations, manipulation tasks, and coordinated multi-joint movements.\n    - It plays a role in scenarios where a robot needs to follow a predefined path or perform complex maneuvers.\n\nUsage in the ROS2 System:\n    - It is suitable for use in ROS2 systems that require joint trajectory control, such as robotic arm controllers, industrial automation systems, and any application involving articulated robots.",
         "interfaces": [
             {
                 "name": "trajectory_msgs/msg/JointTrajectory",
@@ -24,7 +22,6 @@
     {
         "name": "/controller_manager/set_parameters",
         "type": "service",
-        "description": "Purpose of the ROS2 Element:\n   - The `/controller_manager/set_parameters` service allows for the dynamic setting of parameters for controllers in a ROS2 system. It is typically used to adjust controller settings without restarting the system, enabling real-time tuning and configuration.\n\nMobile Robot Module:\n   - This service relates to the control module of a mobile robot, specifically the controller management aspect.\n\nRelevance for Specific Tasks:\n   - This service is crucial for tasks requiring real-time parameter adjustments, such as tuning PID controllers or changing operational modes. It is used in scenarios where adaptive control is necessary, such as varying load conditions or environmental changes.\n\nUsage in the ROS2 System:\n   - It is suitable for tasks like dynamic reconfiguration of control parameters during operation, enabling seamless transitions and optimizations in control strategies.",
         "interfaces": [
             {
                 "name": "rcl_interfaces/srv/SetParameters",
@@ -35,7 +32,6 @@
     {
         "name": "/object_controller/set_parameters",
         "type": "service",
-        "description": "Purpose of the ROS2 Element:\n    - The `/object_controller/set_parameters` service allows for the dynamic configuration of parameters within a ROS2 node. It is typically used to adjust control parameters on-the-fly without restarting the node, which is crucial for fine-tuning and adapting to changing conditions.\n\nMobile Robot Module:\n    - This service relates to the control module of a mobile robot, particularly in the context of object manipulation or navigation where parameter tuning is essential.\n\nRelevance for Specific Tasks:\n    - This service is relevant for tasks that require real-time parameter adjustments, such as tuning PID controllers or adjusting sensor thresholds. It is crucial in scenarios where environmental conditions change or when optimizing performance during operation.\n\nUsage in the ROS2 System:\n    - Suitable for use in ROS2 systems where dynamic reconfiguration is needed, such as during testing phases or adaptive control systems. It is commonly used by nodes that require parameter updates based on feedback or external inputs.",
         "interfaces": [
             {
                 "name": "rcl_interfaces/srv/SetParameters",
