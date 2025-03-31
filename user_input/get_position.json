@@ -1,0 +1,21 @@
+{
+    "skill": {
+        "name": "get_position",
+        "description": "Retrieve the current position of the mobile robot.", 
+        "skill_type": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin receiving current robot position data."
+            },
+            {
+                "name": "executing", 
+                "action": "Retrieve the current position of the robot and store it as output."
+            },
+            {
+                "name": "completing", 
+                "action": "Shut down any processes used to obtain the robot position."
+            }
+        ]
+    }
+}
