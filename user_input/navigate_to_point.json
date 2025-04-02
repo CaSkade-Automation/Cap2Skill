@@ -1,0 +1,33 @@
+{
+    "skill": {
+        "name": "navigate_to_point",
+        "description": "Navigate mobile robot to a desired goal point.", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin navigating the robot."
+            },
+            {
+                "name": "execute", 
+                "action": "Set the desired goal point and navigate the robot to this point. If the goal is not possible, abort."
+            },
+            {
+                "name": "completing",
+                "action": "Print the reached goal position."
+            }, 
+            {
+                "name": "stopping", 
+                "action": "Cancel the navigation."
+            }, 
+            {
+                "name": "aborting", 
+                "action": "Set the velocity of the robot to zero in all directions."
+            },
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to set the robot's velocity."
+            }
+        ]
+    }
+}
