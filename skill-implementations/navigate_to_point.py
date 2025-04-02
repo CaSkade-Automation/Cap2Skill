@@ -7,7 +7,7 @@ from nav2_msgs.action import NavigateToPose
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Twist
 
-@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/skills/navigate-to-point", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/capabilities/navigate-to-point", description = "Navigate mobile robot to a desired goal point.")
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/navigateToPoint/navigateToPoint", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/navigateToPoint", description = "Navigate mobile robot to a desired goal point.")
 class NavigateToPointSkill(ROS2Skill):
     def __init__(self):
         super().__init__("navigate_to_point")
