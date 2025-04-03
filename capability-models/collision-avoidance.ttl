@@ -1,4 +1,4 @@
-@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 @prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
 @prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,350 +9,350 @@
 @prefix openmath: <http://openmath.org/vocab/math#> .
 @prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
 @prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
-@prefix CollisionAvoidance: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#> .
-@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix collisionAvoid: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
-<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance> rdf:type owl:Ontology ;
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance> rdf:type owl:Ontology ;
                                                                      owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Velocity_TD
-CollisionAvoidance:Velocity_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/velocity_TD
+collisionAvoid:velocity_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m/s" ;
 					DINEN61360:Definition "This type specifies the velocity of any mobile resource in meters per second." .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Distance_TD
-CollisionAvoidance:Distance_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/distance_TD
+collisionAvoid:distance_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the length of any object or distance in meters." .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Time_TD
-CollisionAvoidance:Time_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/time_TD
+collisionAvoid:time_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "s" ;
 					DINEN61360:Definition "This type specifies the time of any process in seconds." .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Degree_TD
-CollisionAvoidance:Degree_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/degree_TD
+collisionAvoid:degree_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "°" ;
 					DINEN61360:Definition "This type specifies the degree of any angle." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance
-CollisionAvoidance:Collision-Avoidance rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/collisionAvoidance
+collisionAvoid:collisionAvoidance rdf:type owl:NamedIndividual ,
 							VDI3682:ProcessOperator ,
 							CaSk:ProvidedCapability ;
-					VDI3682:hasInput CollisionAvoidance:Collision-Avoidance_Input_Velocity ,
-							CollisionAvoidance:Collision-Avoidance_Input_Time ,  
-							CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance ; 
-					VDI3682:hasOutput CollisionAvoidance:Collision-Avoidance_Output_Velocity ,
-							CollisionAvoidance:Collision-Avoidance_Output_Time , 
-							CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance , 
-							CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree ;
-					CSS:isRestrictedBy CollisionAvoidance:Collision-Avoidance_Constraint_Time ;
-					CSS:requiresCapability CollisionAvoidance:Collision-Avoidance ;
+					VDI3682:hasInput collisionAvoid:inVelocity ,
+							collisionAvoid:inTime ,  
+							collisionAvoid:inObstacleDistance ; 
+					VDI3682:hasOutput collisionAvoid:outVelocity ,
+							collisionAvoid:outTime , 
+							collisionAvoid:outObstacleDistance , 
+							collisionAvoid:outObstacleDegree ;
+					CSS:isRestrictedBy collisionAvoid:constraintTime ;
+					CSS:requiresCapability collisionAvoid:collisionAvoidance ;
 					rdfs:comment "I am a collision-avoidance capability that sets the mobile robot's velocity in forward, sideways, or turning direction to a desired velocity for a desired time. If the distance to an obstacle detected by a LiDAR sensor falls below a desired minimum threshold or the desired time elapses, the mobile robot stops, and all velocities are set to zero." .
 													  													  
 													  
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Constraint_Time
-CollisionAvoidance:Collision-Avoidance_Constraint_Time rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/constraintTime
+collisionAvoid:constraintTime rdf:type owl:NamedIndividual ,
                                                 openmath:Application ,
                                                 CSS:CapabilityConstraint ;
-                                       openmath:arguments (CollisionAvoidance:Collision-Avoidance_Output_Time_ID CollisionAvoidance:Collision-Avoidance_Input_Time_ID) ;
+                                       openmath:arguments (collisionAvoid:outTime_ID collisionAvoid:inTime_ID) ;
                                        openmath:operator <http://www.openmath.org/cd/relation1#leq> ;
-                                       CSS:references CollisionAvoidance:Collision-Avoidance_Input_Time_ID ,
-                                                      CollisionAvoidance:Collision-Avoidance_Output_Time_ID .
+                                       CSS:references collisionAvoid:inTime_ID ,
+                                                      collisionAvoid:outTime_ID .
 													  
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity
-CollisionAvoidance:Collision-Avoidance_Input_Velocity rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocity
+collisionAvoid:inVelocity rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Input_Velocity_X_DE ,
-							CollisionAvoidance:Collision-Avoidance_Input_Velocity_Y_DE ,
-							CollisionAvoidance:Collision-Avoidance_Input_Velocity_Angular_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Input_Velocity_X_ID ,
-							CollisionAvoidance:Collision-Avoidance_Input_Velocity_Y_ID ,
-							CollisionAvoidance:Collision-Avoidance_Input_Velocity_Angular_ID .
+					DINEN61360:has_Data_Element collisionAvoid:inVelocityX_DE ,
+							collisionAvoid:inVelocityY_DE ,
+							collisionAvoid:inVelocityAngular_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:inVelocityX_ID ,
+							collisionAvoid:inVelocityY_ID ,
+							collisionAvoid:inVelocityAngular_ID .
 							
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_X_DE
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_X_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityX_DE
+collisionAvoid:inVelocityX_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Input_Velocity_X_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:inVelocityX_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_X_ID
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityX_ID
+collisionAvoid:inVelocityX_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_X_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityX_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Y_DE
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_Y_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityY_DE
+collisionAvoid:inVelocityY_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Input_Velocity_Y_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:inVelocityY_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Y_ID
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityY_ID
+collisionAvoid:inVelocityY_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Y_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityY_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Angular_DE
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_Angular_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityAngular_DE
+collisionAvoid:inVelocityAngular_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Input_Velocity_Angular_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:inVelocityAngular_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Angular_ID
-CollisionAvoidance:Collision-Avoidance_Input_Velocity_Angular_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityAngular_ID
+collisionAvoid:inVelocityAngular_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Velocity_Angular_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inVelocityAngular_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Obstacle_Distance
-CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inObstacleDistance
+collisionAvoid:inObstacleDistance rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance_ID .
+					DINEN61360:has_Data_Element collisionAvoid:inObstacleDistance_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:inObstacleDistance_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Obstacle_Distance_DE
-CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inObstacleDistance_DE
+collisionAvoid:inObstacleDistance_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Distance_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:inObstacleDistance_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:distance_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Obstacle_Distance_ID
-CollisionAvoidance:Collision-Avoidance_Input_Obstacle_Distance_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inObstacleDistance_ID
+collisionAvoid:inObstacleDistance_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Obstacle_Distance_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inObstacleDistance_ID" ;
 					DINEN61360:Expression_Goal "Requirement" ; 
 					DINEN61360:Logic_Interpretation "<=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Time
-CollisionAvoidance:Collision-Avoidance_Input_Time rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inTime
+collisionAvoid:inTime rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Input_Time_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Input_Time_ID .
+					DINEN61360:has_Data_Element collisionAvoid:inTime_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:inTime_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Time_DE
-CollisionAvoidance:Collision-Avoidance_Input_Time_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inTime_DE
+collisionAvoid:inTime_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Input_Time_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Time_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:inTime_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:time_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Time_ID
-CollisionAvoidance:Collision-Avoidance_Input_Time_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inTime_ID
+collisionAvoid:inTime_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Input_Time_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/inTime_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity
-CollisionAvoidance:Collision-Avoidance_Output_Velocity rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocity
+collisionAvoid:outVelocity rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID ,
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID , 
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID . 
+					VDI3682:isCharacterizedBy collisionAvoid:outVelocityX_ID ,
+							collisionAvoid:outVelocityY_ID , 
+							collisionAvoid:outVelocityAngular_ID . 
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_X_ID
-CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityX_ID
+collisionAvoid:outVelocityX_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_X_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityX_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" ;
 					DINEN61360:Value 0.0 . 
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Y_ID
-CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityY_ID
+collisionAvoid:outVelocityY_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Y_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityY_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" ;
 					DINEN61360:Value 0.0 .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Angular_ID
-CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityAngular_ID
+collisionAvoid:outVelocityAngular_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Velocity_Angular_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outVelocityAngular_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" ;
 					DINEN61360:Value 0.0 .					
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Time
-CollisionAvoidance:Collision-Avoidance_Output_Time rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outTime
+collisionAvoid:outTime rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Output_Time_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Output_Time_ID .
+					DINEN61360:has_Data_Element collisionAvoid:outTime_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:outTime_ID .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Time_DE
-CollisionAvoidance:Collision-Avoidance_Output_Time_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outTime_DE
+collisionAvoid:outTime_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Output_Time_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Time_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:outTime_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:time_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Time_ID
-CollisionAvoidance:Collision-Avoidance_Output_Time_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outTime_ID
+collisionAvoid:outTime_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Time_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outTime_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .						
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Distance
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDistance
+collisionAvoid:outObstacleDistance rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance_ID .
+					DINEN61360:has_Data_Element collisionAvoid:outObstacleDistance_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:outObstacleDistance_ID .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Distance_DE
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDistance_DE
+collisionAvoid:outObstacleDistance_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Distance_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:outObstacleDistance_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:distance_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Distance_ID
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Distance_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDistance_ID
+collisionAvoid:outObstacleDistance_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Distance_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDistance_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .	
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Degree
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDegree
+collisionAvoid:outObstacleDegree rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_ID .
+					DINEN61360:has_Data_Element collisionAvoid:outObstacleDegree_DE ;
+					VDI3682:isCharacterizedBy collisionAvoid:outObstacleDegree_ID .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Degree_DE
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDegree_DE
+collisionAvoid:outObstacleDegree_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_ID ;
-					DINEN61360:has_Type_Description CollisionAvoidance:Degree_TD .
+					DINEN61360:has_Instance_Description collisionAvoid:outObstacleDegree_ID ;
+					DINEN61360:has_Type_Description collisionAvoid:degree_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Degree_ID
-CollisionAvoidance:Collision-Avoidance_Output_Obstacle_Degree_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDegree_ID
+collisionAvoid:outObstacleDegree_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Collision-Avoidance_Output_Obstacle_Degree_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/collisionAvoidance/outObstacleDegree_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .	
 
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700
-CollisionAvoidance:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
 							CSS:Resource ;
-					CSS:providesCapability CollisionAvoidance:Collision-Avoidance ;
-					DINEN61360:has_Data_Element CollisionAvoidance:Neobotix-MMO-700_Velocity_X_DE ,
-							CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_DE ,
-							CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_DE ;
-					VDI3682:isCharacterizedBy CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID ,
-							CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID ,
-							CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_ID . 
+					CSS:providesCapability collisionAvoid:collisionAvoidance ;
+					DINEN61360:has_Data_Element :velocityX_DE ,
+							:velocityY_DE ,
+							:velocityAngular_DE ;
+					VDI3682:isCharacterizedBy :velocityX_ID ,
+							:velocityY_ID ,
+							:velocityAngular_ID . 
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_DE
-CollisionAvoidance:Neobotix-MMO-700_Velocity_X_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityX_DE
+:velocityX_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID ,
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_X_ID ;
-                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+                     DINEN61360:has_Instance_Description :velocityX_ID ,
+							collisionAvoid:outVelocityX_ID ;
+                     DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_ID
-CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityX_ID
+:velocityX_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_X_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityX_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_DE
-CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityY_DE
+:velocityY_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID ,
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Y_ID ;
-                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+                     DINEN61360:has_Instance_Description :velocityY_ID ,
+							collisionAvoid:outVelocityY_ID ;
+                     DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_ID
-CollisionAvoidance:Neobotix-MMO-700_Velocity_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityY_ID
+:velocityY_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Y_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityY_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 
 					 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_DE
-CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityAngular_DE
+:velocityAngular_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description CollisionAvoidance:Neobotix-MMO-700_Velocity_Angular_ID ,
-							CollisionAvoidance:Collision-Avoidance_Output_Velocity_Angular_ID ;
-                     DINEN61360:has_Type_Description CollisionAvoidance:Velocity_TD .
+                     DINEN61360:has_Instance_Description :velocityAngular_ID ,
+							collisionAvoid:outVelocityAngular_ID ;
+                     DINEN61360:has_Type_Description collisionAvoid:velocity_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_ID
-CollisionAvoidance:Neobotix-MMO-700_Velocity_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityAngular_ID
+:velocityAngular_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/collision-avoidance#Neobotix-MMO-700_Velocity_Angular_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocityAngular_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 

@@ -1,0 +1,29 @@
+{
+    "skill": {
+        "name": "collision_avoidance",
+        "description": "Move the mobile robot with the desired velocity in a desired time while detecting and avoiding obstacles.", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin moving the robot."
+            },
+            {
+                "name": "execute", 
+                "action": "Set the mobile robot's velocity in forward, sideways, or turning direction to a desired velocity for a desired time. If the distance to an obstacle detected by a LiDAR sensor falls below a desired minimum threshold, fire the stop transition. When the desired time elapses, the mobile robot stops, and all velocities are set to zero."
+            },
+            {
+                "name": "completing",
+                "action": "Print the current velocity of the robot, the traveled time and the distance and degree to the nearest obstacle."
+            }, 
+            {
+                "name": "stopping", 
+                "action": "Set the velocity of the robot to zero."
+            }, 
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to move the robot."
+            }
+        ]
+    }
+}
