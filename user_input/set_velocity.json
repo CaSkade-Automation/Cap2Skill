@@ -13,6 +13,10 @@
                 "action": "Set the velocity of the robot to the desired value if it does not exceed the maximum possible velocity."
             },
             {
+                "name": "completing",
+                "action": "Print the current velocity of the robot."
+            }, 
+            {
                 "name": "stopping", 
                 "action": "Set the velocity of the robot to zero."
             }, 
