@@ -1,0 +1,29 @@
+{
+    "skill": {
+        "name": "rotate",
+        "description": "Rotate the mobile robot to a desired orientation.", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin rotating the robot."
+            },
+            {
+                "name": "execute", 
+                "action": "Get the actual orientation of the robot and set the angular velocity to achieve the desired orientation. The angular velocity is maintained until the desired orientation is reached and then set to zero to stop the mobile robot."
+            },
+            {
+                "name": "completing",
+                "action": "Print the reached goal orientation."
+            }, 
+            {
+                "name": "stopping", 
+                "action": "Set the velocity of the robot to zero."
+            }, 
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to rotate the robot."
+            }
+        ]
+    }
+}

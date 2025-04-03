@@ -1,4 +1,4 @@
-@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 @prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
 @prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,46 +9,46 @@
 @prefix openmath: <http://openmath.org/vocab/math#> .
 @prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
 @prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
-@prefix Rotate: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#> .
-@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix rotate: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
-<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate> rdf:type owl:Ontology ;
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate> rdf:type owl:Ontology ;
                                                                      owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Degree_TD
-Rotate:Degree_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/degree_TD
+rotate:degree_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "°" ;
 					DINEN61360:Definition "This type specifies the degree of any angle." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate
-Rotate:Rotate rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/rotate
+rotate:rotate rdf:type owl:NamedIndividual ,
 							VDI3682:ProcessOperator ,
 							CaSk:ProvidedCapability ;
-					VDI3682:hasInput Rotate:Rotate_Input_Degree ;
-					VDI3682:hasOutput Rotate:Rotate_Output_Degree ;
-					CSS:isRestrictedBy Rotate:Rotate_Degree_Constraint ;
-					CSS:requiresCapability Rotate:Rotate ;
+					VDI3682:hasInput rotate:inDegree ;
+					VDI3682:hasOutput rotate:outDegree ;
+					CSS:isRestrictedBy rotate:constraintDegree ;
+					CSS:requiresCapability rotate:rotate ;
 					rdfs:comment "I am a rotate capability that sets the mobile robot's angular velocity based on a desired degree of orientation. The angular velocity is maintained until the desired orientation is reached and then set to zero to stop the mobile robot." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Degree_Constraint
-Rotate:Rotate_Degree_Constraint rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/constraintDegree
+rotate:constraintDegree rdf:type owl:NamedIndividual ,
                                                 openmath:Application ,
                                                 CSS:CapabilityConstraint ;
                                        openmath:arguments (
-											Rotate:Rotate_Output_Degree_ID 
+											rotate:outDegree_ID 
 											[
 												rdf:type openmath:Application ; 
 												openmath:arguments (
 													[
 														rdf:type openmath:Application ; 
-														openmath:arguments (Rotate:Rotate_Input_Degree_ID Rotate:Neobotix-MMO-700_Degree_ID) ;
+														openmath:arguments (rotate:inDegree_ID :degree_ID) ;
 														openmath:operator <http://www.openmath.org/cd/arith1#plus>
 													]
 													[
@@ -60,71 +60,71 @@ Rotate:Rotate_Degree_Constraint rdf:type owl:NamedIndividual ,
 											]
 									    ) ; 
                                        openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
-                                       CSS:references Rotate:Rotate_Input_Degree_ID ,
-                                                      Rotate:Rotate_Output_Degree_ID ,
-													  Rotate:Neobotix-MMO-700_Degree_ID .
+                                       CSS:references rotate:inDegree_ID ,
+                                                      rotate:outDegree_ID ,
+													  :degree_ID .
 													  
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Input_Degree
-Rotate:Rotate_Input_Degree rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/inDegree
+rotate:inDegree rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element Rotate:Rotate_Input_Degree_DE ;
-					VDI3682:isCharacterizedBy Rotate:Rotate_Input_Degree_ID .
+					DINEN61360:has_Data_Element rotate:inDegree_DE ;
+					VDI3682:isCharacterizedBy rotate:inDegree_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Input_Degree_DE
-Rotate:Rotate_Input_Degree_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/inDegree_DE
+rotate:inDegree_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description Rotate:Rotate_Input_Degree_ID ;
-					DINEN61360:has_Type_Description Rotate:Degree_TD .
+					DINEN61360:has_Instance_Description rotate:inDegree_ID ;
+					DINEN61360:has_Type_Description rotate:degree_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Input_Degree_ID
-Rotate:Rotate_Input_Degree_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/inDegree_ID
+rotate:inDegree_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Input_Degree_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/inDegree_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Output_Degree
-Rotate:Rotate_Output_Degree rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/outDegree
+rotate:outDegree rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					VDI3682:isCharacterizedBy Rotate:Rotate_Output_Degree_ID .
+					VDI3682:isCharacterizedBy rotate:outDegree_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Output_Degree_ID
-Rotate:Rotate_Output_Degree_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/outDegree_ID
+rotate:outDegree_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Rotate_Output_Degree_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/rotate/outDegree_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .							
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Neobotix-MMO-700
-Rotate:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
 							CSS:Resource ;
-					CSS:providesCapability Rotate:Rotate ;
-					DINEN61360:has_Data_Element Rotate:Neobotix-MMO-700_Degree_DE ;
-					VDI3682:isCharacterizedBy Rotate:Neobotix-MMO-700_Degree_ID .
+					CSS:providesCapability rotate:rotate ;
+					DINEN61360:has_Data_Element :degree_DE ;
+					VDI3682:isCharacterizedBy :degree_ID .
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Neobotix-MMO-700_Degree_DE
-Rotate:Neobotix-MMO-700_Degree_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/degree_DE
+:degree_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description Rotate:Neobotix-MMO-700_Degree_ID ,
-							Rotate:Rotate_Output_Degree_ID ;
-                     DINEN61360:has_Type_Description Rotate:Degree_TD .
+                     DINEN61360:has_Instance_Description :degree_ID ,
+							rotate:outDegree_ID ;
+                     DINEN61360:has_Type_Description rotate:degree_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Neobotix-MMO-700_Degree_ID
-Rotate:Neobotix-MMO-700_Degree_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/degree_ID
+:degree_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/rotate#Neobotix-MMO-700_Degree_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/degree_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 
