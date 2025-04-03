@@ -1,0 +1,29 @@
+{
+    "skill": {
+        "name": "move_forward",
+        "description": "Move the mobile robot forward a desired distance in a desired time.", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin moving the robot forward."
+            },
+            {
+                "name": "execute", 
+                "action": "Set the velocity of the robot to a calculated value for the desired time. If the calculated velocity exceeds the maximum velocity, set the maximum velocity and calculate the new time necessary to travel the desired distance."
+            },
+            {
+                "name": "completing",
+                "action": "Print the current velocity of the robot and the traveled distance and time."
+            }, 
+            {
+                "name": "stopping", 
+                "action": "Set the velocity of the robot to zero."
+            }, 
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to move the robot."
+            }
+        ]
+    }
+}
