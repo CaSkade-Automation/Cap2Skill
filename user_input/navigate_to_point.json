@@ -10,7 +10,7 @@
             },
             {
                 "name": "execute", 
-                "action": "Set the desired goal point and navigate the robot to this point. If the goal is not possible, abort."
+                "action": "Set the desired goal point and navigate the robot to this point. If the goal is not possible, fire transition abort."
             },
             {
                 "name": "completing",
@@ -18,7 +18,7 @@
             }, 
             {
                 "name": "stopping", 
-                "action": "Cancel the navigation."
+                "action": "Cancel the navigation. If the cancel is not possible, fire transition abort."
             }, 
             {
                 "name": "aborting", 

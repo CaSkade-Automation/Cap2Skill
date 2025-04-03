@@ -19,6 +19,7 @@ class NavigateToPointSkill(ROS2Skill):
         self.goal_rejected = False
         self.goal_failed = False
         self.cancel_success = False
+        self.cancel_failed = False
 
     @skill_parameter(is_required=True, name="position_x", description="The x coordinate of the goal position.")
     def get_position_x(self) -> float:
@@ -91,6 +92,7 @@ class NavigateToPointSkill(ROS2Skill):
             self.cancel_success = True
         else:
             self.node.get_logger().info('Goal failed to cancel')
+            self.cancel_failed = True
 
     @completing
     def completing(self) -> None:
@@ -98,12 +100,15 @@ class NavigateToPointSkill(ROS2Skill):
 
     @stopping
     def stopping(self) -> None:
-        self.node.get_logger().info("NavigateToPointSkill is stopping")
+        self.node.get_logger().info("NavigateToPointSkill is stopping with canceling the goal")
         future = self.goal_handle.cancel_goal_async()
         future.add_done_callback(self.cancel_done)
-        while not self.cancel_success:
+        while not self.cancel_success or not self.cancel_failed:
             self.node.get_logger().info("Waiting for goal to be canceled...")
             time.sleep(1)
+        if self.cancel_failed:
+            self.node.get_logger().info("Goal failed to cancel.")
+            self.state_machine.abort()
 
     @aborting
     def aborting(self) -> None:
@@ -127,3 +132,4 @@ class NavigateToPointSkill(ROS2Skill):
         self.goal_rejected = False
         self.goal_failed = False
         self.cancel_success = False
+        self.cancel_failed = False
