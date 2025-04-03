@@ -12,7 +12,8 @@ class NavigateToPointSkill(ROS2Skill):
     def __init__(self):
         super().__init__("navigate_to_point")
 
-        self.position = Point()
+        self.goal_position = Point()
+        self.robot_position = Point()
         self._action_client = None
         self.goal_handle = None
         self.goal_reached = False
@@ -21,13 +22,21 @@ class NavigateToPointSkill(ROS2Skill):
         self.cancel_success = False
         self.cancel_failed = False
 
-    @skill_parameter(is_required=True, name="position_x", description="The x coordinate of the goal position.")
-    def get_position_x(self) -> float:
-        return self.position.x
+    @skill_parameter(is_required=True, name="goal_position_x", description="The x coordinate of the goal position.")
+    def get_goal_position_x(self) -> float:
+        return self.goal_position.x
     
-    @skill_parameter(is_required=True, name="position_y", description="The y coordinate of the goal position.")
-    def get_position_y(self) -> float:
-        return self.position.y
+    @skill_parameter(is_required=True, name="goal_position_y", description="The y coordinate of the goal position.")
+    def get_goal_position_y(self) -> float:
+        return self.goal_position.y
+    
+    @skill_output(is_required=True, name="robot_position_x", description="Indicates if the x coordinate of the goal was reached successfully.")
+    def get_robot_position_x(self) -> float:
+        return self.robot_position.x
+    
+    @skill_output(is_required=True, name="robot_position_y", description="Indicates if the y coordinate of the goal was reached successfully.")
+    def get_robot_position_y(self) -> float:
+        return self.robot_position.y
     
     @starting
     def starting(self) -> None:
@@ -38,8 +47,8 @@ class NavigateToPointSkill(ROS2Skill):
     def execute(self) -> None:
         goal_msg = NavigateToPose.Goal()
         goal_msg.pose.header.frame_id = "map"
-        goal_msg.pose.pose.position.x = self.position.x
-        goal_msg.pose.pose.position.y = self.position.y
+        goal_msg.pose.pose.position.x = self.goal_position.x
+        goal_msg.pose.pose.position.y = self.goal_position.y
         goal_msg.pose.pose.position.z = 0.0
         self._action_client.wait_for_server()
 
@@ -81,6 +90,7 @@ class NavigateToPointSkill(ROS2Skill):
         if result: 
             self.node.get_logger().info('Goal reached successfully!')
             self.goal_reached = True
+            self.robot_position = self.goal_position
         else: 
             self.node.get_logger().info('Failed to reach goal')
             self.goal_failed = True
@@ -96,7 +106,7 @@ class NavigateToPointSkill(ROS2Skill):
 
     @completing
     def completing(self) -> None:
-        self.node.get_logger().info(f"NavigateToPointSkill is completing with position: x={self.position.x}, y={self.position.y}")
+        self.node.get_logger().info(f"NavigateToPointSkill is completing with position: x={self.robot_position.x}, y={self.robot_position.y}")
 
     @stopping
     def stopping(self) -> None:
