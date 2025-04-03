@@ -3,7 +3,7 @@ from pyskillup.decorator_check.decorator_check import ROS2Skill
 from pyskillup.decorators.skill_interface import SkillInterface
 from geometry_msgs.msg import Twist
 
-@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/skills/set-velocity", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/capabilities/set-velocity", description = "Set the velocity of the mobile robot in the forward direction.")
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/setVelocity/setVelocity", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/setVelocity", description = "Set the velocity of the mobile robot in the forward direction.")
 class SetVelocitySkill(ROS2Skill): 
 
     MAX_VELOCITY = 0.8
