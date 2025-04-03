@@ -1,4 +1,4 @@
-@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 @prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
 @prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,130 +9,130 @@
 @prefix openmath: <http://openmath.org/vocab/math#> .
 @prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
 @prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
-@prefix GetPosition: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#> .
-@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix getPosition: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
-<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position> rdf:type owl:Ontology ;
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition> rdf:type owl:Ontology ;
                                                                      owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_X_TD
-GetPosition:Position_X_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/positionX_TD
+getPosition:positionX_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Position_Y_TD
-GetPosition:Position_Y_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/positionY_TD
+getPosition:positionY_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the y coordinate in meters." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position
-GetPosition:Get-Position rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/getPosition
+getPosition:getPosition rdf:type owl:NamedIndividual ,
 							VDI3682:ProcessOperator ,
 							CaSk:ProvidedCapability ;
-					VDI3682:hasOutput GetPosition:Get-Position_Out_Position ;
-					CSS:isRestrictedBy GetPosition:Get-Position_Constraint_X ,
-							GetPosition:Get-Position_Constraint_Y ;
-					CSS:requiresCapability GetPosition:Get-Position ;
+					VDI3682:hasOutput getPosition:outPosition ;
+					CSS:isRestrictedBy getPosition:constraintX ,
+							getPosition:constraintY ;
+					CSS:requiresCapability getPosition:getPosition ;
 					rdfs:comment "I am a get-position capability that retrieves the mobile robot's position in x and y coordinates." .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Constraint_X
-GetPosition:Get-Position_Constraint_X rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/constraintX
+getPosition:constraintX rdf:type owl:NamedIndividual ,
                                                 openmath:Application ,
                                                 CSS:CapabilityConstraint ;
-                                       openmath:arguments (GetPosition:Neobotix-MMO-700_Position_X_ID GetPosition:Get-Position_Out_Position_X_ID) ;
+                                       openmath:arguments (:positionX_ID getPosition:outPositionX_ID) ;
                                        openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
-                                       CSS:references GetPosition:Neobotix-MMO-700_Position_X_ID ,
-                                                      GetPosition:Get-Position_Out_Position_X_ID .
+                                       CSS:references :positionX_ID ,
+                                                      getPosition:outPositionX_ID .
 			
 			
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Constraint_Y
-GetPosition:Get-Position_Constraint_Y rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/constraintY
+getPosition:constraintY rdf:type owl:NamedIndividual ,
                                                 openmath:Application ,
                                                 CSS:CapabilityConstraint ;
-                                       openmath:arguments (GetPosition:Neobotix-MMO-700_Position_Y_ID GetPosition:Get-Position_Out_Position_Y_ID) ;
+                                       openmath:arguments (:positionY_ID getPosition:outPositionY_ID) ;
                                        openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
-                                       CSS:references GetPosition:Neobotix-MMO-700_Position_Y_ID ,
-                                                      GetPosition:Get-Position_Out_Position_Y_ID .
+                                       CSS:references :positionY_ID ,
+                                                      getPosition:outPositionY_ID .
 													  
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position
-GetPosition:Get-Position_Out_Position rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPosition
+getPosition:outPosition rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					VDI3682:isCharacterizedBy GetPosition:Get-Position_Out_Position_X_ID ,
-							GetPosition:Get-Position_Out_Position_Y_ID .
+					VDI3682:isCharacterizedBy getPosition:outPositionX_ID ,
+							getPosition:outPositionY_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position_X_ID
-GetPosition:Get-Position_Out_Position_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionX_ID
+getPosition:outPositionX_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position_X_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionX_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position_Y_ID
-GetPosition:Get-Position_Out_Position_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionY_ID
+getPosition:outPositionY_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Get-Position_Out_Position_Y_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionY_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .					
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700
-GetPosition:Neobotix-MMO-700 rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
 							CSS:Resource ;
-					CSS:providesCapability GetPosition:Get-Position ;
-					DINEN61360:has_Data_Element GetPosition:Neobotix-MMO-700_Position_X_DE ,
-							GetPosition:Neobotix-MMO-700_Position_Y_DE ;
-					VDI3682:isCharacterizedBy GetPosition:Neobotix-MMO-700_Position_X_ID ,
-							GetPosition:Neobotix-MMO-700_Position_Y_ID .
+					CSS:providesCapability getPosition:getPosition ;
+					DINEN61360:has_Data_Element :positionX_DE ,
+							:positionY_DE ;
+					VDI3682:isCharacterizedBy :positionX_ID ,
+							:positionY_ID .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_X_DE
-GetPosition:Neobotix-MMO-700_Position_X_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_DE
+:positionX_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description GetPosition:Neobotix-MMO-700_Position_X_ID ,
-							GetPosition:Get-Position_Out_Position_X_ID ;
-                     DINEN61360:has_Type_Description GetPosition:Position_X_TD .
+                     DINEN61360:has_Instance_Description :positionX_ID ,
+							getPosition:outPositionX_ID ;
+                     DINEN61360:has_Type_Description getPosition:positionX_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_X_ID
-GetPosition:Neobotix-MMO-700_Position_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID
+:positionX_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_X_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 					 
 					 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_Y_DE
-GetPosition:Neobotix-MMO-700_Position_Y_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_DE
+:positionY_DE rdf:type owl:NamedIndividual ,
                              DINEN61360:Data_Element ;
-                     DINEN61360:has_Instance_Description GetPosition:Neobotix-MMO-700_Position_Y_ID ,
-							GetPosition:Get-Position_Out_Position_Y_ID ;
-                     DINEN61360:has_Type_Description GetPosition:Position_Y_TD .
+                     DINEN61360:has_Instance_Description :positionY_ID ,
+							getPosition:outPositionY_ID ;
+                     DINEN61360:has_Type_Description getPosition:positionY_TD .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_Y_ID
-GetPosition:Neobotix-MMO-700_Position_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID
+:positionY_ID rdf:type owl:NamedIndividual ,
                               openmath:Variable ,
                               DINEN61360:Instance_Description ,
                               DINEN61360:Real ;
-                     openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-position#Neobotix-MMO-700_Position_Y_ID" ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID" ;
                      DINEN61360:Expression_Goal "Actual_Value" ;
                      DINEN61360:Logic_Interpretation "=" .
 

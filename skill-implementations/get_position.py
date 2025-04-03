@@ -5,7 +5,7 @@ from pyskillup.decorators.skill_interface import SkillInterface
 from geometry_msgs.msg import Point
 from nav_msgs.msg import Odometry
 
-@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/skills/get-position", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots#neobotix-mmo-700/capabilities/get-position", description = "Retrieve the current position of the mobile robot.")
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/getPosition/getPosition", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/getPosition", description = "Retrieve the current position of the mobile robot.")
 class GetPositionSkill(ROS2Skill): 
 
     def __init__(self):
