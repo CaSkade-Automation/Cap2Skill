@@ -1,4 +1,4 @@
-@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 @prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
 @prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,102 +9,107 @@
 @prefix openmath: <http://openmath.org/vocab/math#> .
 @prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
 @prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
-@prefix Mapping: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#> .
-@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix mapping: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
-<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping> rdf:type owl:Ontology ;
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping> rdf:type owl:Ontology ;
                                                                      owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Distance_TD
-Mapping:Distance_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/distance_TD
+mapping:distance_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the length of any object or distance in meters." .
 	
 	
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Map_TD
-Mapping:Mapped_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/map_TD
+mapping:map_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Definition "This type specifies a map as a yaml file" .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping
-Mapping:Mapping rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/mapping
+mapping:mapping rdf:type owl:NamedIndividual ,
 							VDI3682:ProcessOperator ,
 							CaSk:ProvidedCapability ;
-					VDI3682:hasInput Mapping:Mapping_In_Distance ;		
-					VDI3682:hasOutput Mapping:Mapping_Out_Map ;
-					CSS:requiresCapability Mapping:Mapping ;
+					VDI3682:hasInput mapping:inDistance ;		
+					VDI3682:hasOutput mapping:outMap ;
+					CSS:requiresCapability mapping:mapping ;
 					rdfs:comment "I am a mapping capability that maps an area of a desired length x and y based on the mobile robot's position by moving the mobile robot in that area. The generated map serves as the foundation for all further activities of the mobile robot." .
 													  
 													  
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance
-Mapping:Mapping_In_Position rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance
+mapping:inDistance rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element Mapping:Mapping_In_Distance_X_DE ,
-							Mapping:Mapping_In_Distance_Y_DE ;
-					VDI3682:isCharacterizedBy Mapping:Mapping_In_Distance_X_ID ,
-							Mapping:Mapping_In_Distance_Y_ID .
+					DINEN61360:has_Data_Element mapping:inDistance_X_DE ,
+							mapping:inDistance_Y_DE ;
+					VDI3682:isCharacterizedBy mapping:inDistance_X_ID ,
+							mapping:inDistance_Y_ID .
 							
 							
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_X_DE
-Mapping:Mapping_In_Distance_X_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_X_DE
+mapping:inDistance_X_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description Mapping:Mapping_In_Distance_X_ID ;
-					DINEN61360:has_Type_Description Mapping:Distance_TD .
+					DINEN61360:has_Instance_Description mapping:inDistance_X_ID ;
+					DINEN61360:has_Type_Description mapping:distance_TD .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_X_ID
-Mapping:Mapping_In_Distance_X_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_X_ID
+mapping:inDistance_X_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_X_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_X_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_Y_DE
-Mapping:Mapping_In_Distance_Y_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_Y_DE
+mapping:inDistance_Y_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description Mapping:Mapping_In_Distance_Y_ID ;
-					DINEN61360:has_Type_Description Mapping:Distance_TD .
+					DINEN61360:has_Instance_Description mapping:inDistance_Y_ID ;
+					DINEN61360:has_Type_Description mapping:distance_TD .
 					
 					
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_Y_ID
-Mapping:Mapping_In_Distance_Y_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_Y_ID
+mapping:inDistance_Y_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_In_Distance_Y_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/inDistance_Y_ID" ;
 					DINEN61360:Logic_Interpretation "=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_Out_Map
-Mapping:Mapping_Out_Map rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/outMap
+mapping:outMap rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:Data_Element Mapping:Mapping_Out_Map_DE ; 
-					VDI3682:isCharacterizedBy Mapping:Mapping_Out_Map_ID .
+					DINEN61360:Data_Element mapping:outMap_DE ; 
+					VDI3682:isCharacterizedBy mapping:outMap_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_Out_Map_DE
-Mapping:Mapping_Out_Map_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/outMap_DE
+mapping:outMap_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description Mapping:Mapping_Out_Map_ID ;
-					DINEN61360:has_Type_Description Mapping:Mapped_TD .
+					DINEN61360:has_Instance_Description mapping:outMap_ID ;
+					DINEN61360:has_Type_Description mapping:map_TD .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_Out_Map_ID
-Mapping:Mapping_Out_Map_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/outMap_ID
+mapping:outMap_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:String ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/mapping#Mapping_Out_Map_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/mapping/outMap_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" . 
 					
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability mapping:mapping .
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

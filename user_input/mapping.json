@@ -1,0 +1,29 @@
+{
+    "skill": {
+        "name": "mapping",
+        "description": "Map an area of a desired length x and y based on the mobile robot's position by moving the mobile robot in that area.", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin mapping the area."
+            },
+            {
+                "name": "execute", 
+                "action": "Move the robot randomly around the area of a desired length x and y based on the mobile robot's position in order to travel and map it completely. If the robot encounters an obstacle, turn the robot and try to move on. Once the entire area has been traveled, store the map as output."
+            },
+            {
+                "name": "stopping", 
+                "action": "Set the velocity of the robot to zero in all directions."
+            },
+            {
+                "name": "completing",
+                "action": "Print the generated map."
+            },
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to map the area."
+            }
+        ]
+    }
+}
