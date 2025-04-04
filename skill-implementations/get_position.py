@@ -37,8 +37,8 @@ class GetPositionSkill(ROS2Skill):
 
     def odom_listener_callback(self, msg: Odometry) -> None: 
         self.position = msg.pose.pose.position
-        self.received_odom = True
         self.node.get_logger().info(f'Received Position: x={self.position.x}, y={self.position.y}')
+        self.received_odom = True
 
     @completing
     def completing(self) -> None:
@@ -47,5 +47,5 @@ class GetPositionSkill(ROS2Skill):
     @resetting
     def resetting(self) -> None:
         self.node.get_logger().info("GetPositionSkill is resetting")
-        self.odom_subscription.destroy()
+        self.node.destroy_subscription(self.odom_subscription)
         self.received_odom = False
