@@ -1,0 +1,25 @@
+{
+    "skill": {
+        "name": "get_distance_to_nearest_object",
+        "description": "Retrieve the distance and orientation to the mobile robot's nearest object using LiDAR sensor data", 
+        "skill_interface": "REST",
+        "states": [
+            {
+                "name": "starting", 
+                "action": "Prepare the system to begin receiving LiDAR sensor data."
+            },
+            {
+                "name": "execute", 
+                "action": "Retrieve the current distance and orientation of the robot's nearest object and store it as output."
+            },
+            {
+                "name": "completing",
+                "action": "Print the retrieved distance and orientation."
+            },
+            {
+                "name": "resetting", 
+                "action": "Shut down processes used to obtain the LiDAR sensor data."
+            }
+        ]
+    }
+}

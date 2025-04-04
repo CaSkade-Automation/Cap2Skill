@@ -1,4 +1,4 @@
-@prefix : <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 @prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
 @prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,85 +9,90 @@
 @prefix openmath: <http://openmath.org/vocab/math#> .
 @prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
 @prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
-@prefix DistToObj: <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#> .
-@base <http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700#> .
+@prefix distToObj: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
-<http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object> rdf:type owl:Ontology ;
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject> rdf:type owl:Ontology ;
                                                                      owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Distance_TD
-DistToObj:Distance_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/distance_TD
+distToObj:distance_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "m" ;
 					DINEN61360:Definition "This type specifies the length of any object or distance in meters." .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Degree_TD
-DistToObj:Degree_TD rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/degree_TD
+distToObj:degree_TD rdf:type owl:NamedIndividual ,
 							DINEN61360:Type_Description ;
 					DINEN61360:Unit_of_Measure "°" ;
 					DINEN61360:Definition "This type specifies the degree of any angle." .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object
-DistToObj:Get-Distance-To-Nearest-Object rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/getDistanceToNearestObject
+distToObj:getDistanceToNearestObject rdf:type owl:NamedIndividual ,
 							VDI3682:ProcessOperator ,
 							CaSk:ProvidedCapability ;
-					VDI3682:hasOutput DistToObj:Get-Distance-To-Nearest-Object_Out_Distance ,
-							DistToObj:Get-Distance-To-Nearest-Object_Out_Degree ;
-					CSS:requiresCapability DistToObj:Get-Distance-To-Nearest-Object ;
+					VDI3682:hasOutput distToObj:outDistance ,
+							distToObj:outDegree ;
+					CSS:requiresCapability distToObj:getDistanceToNearestObject ;
 					rdfs:comment "I am a get-distance-to-nearest-object capability that retrieves the distance and orientation to the mobile robot's nearest object using LiDAR sensor data." .
 													  
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Distance
-DistToObj:Get-Distance-To-Nearest-Object_Out_Distance rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDistance
+distToObj:outDistance rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element DistToObj:Get-Distance-To-Nearest-Object_Out_Distance_DE ; 
-					VDI3682:isCharacterizedBy DistToObj:Get-Distance-To-Nearest-Object_Out_Distance_ID .
+					DINEN61360:has_Data_Element distToObj:outDistance_DE ; 
+					VDI3682:isCharacterizedBy distToObj:outDistance_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Distance_DE
-DistToObj:Get-Distance-To-Nearest-Object_Out_Distance_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDistance_DE
+distToObj:outDistance_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description DistToObj:Get-Distance-To-Nearest-Object_Out_Distance_ID ;
-					DINEN61360:has_Type_Description DistToObj:Distance_TD .
+					DINEN61360:has_Instance_Description distToObj:outDistance_ID ;
+					DINEN61360:has_Type_Description distToObj:distance_TD .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Distance_ID
-DistToObj:Get-Distance-To-Nearest-Object_Out_Distance_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDistance_ID
+distToObj:outDistance_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Distance_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDistance_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Degree
-DistToObj:Get-Distance-To-Nearest-Object_Out_Degree rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDegree
+distToObj:outDegree rdf:type owl:NamedIndividual ,
 							VDI3682:Information ;
-					DINEN61360:has_Data_Element DistToObj:Get-Distance-To-Nearest-Object_Out_Degree_DE ; 
-					VDI3682:isCharacterizedBy DistToObj:Get-Distance-To-Nearest-Object_Out_Degree_ID .
+					DINEN61360:has_Data_Element distToObj:outDegree_DE ; 
+					VDI3682:isCharacterizedBy distToObj:outDegree_ID .
 
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Degree_DE
-DistToObj:Get-Distance-To-Nearest-Object_Out_Degree_DE rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDegree_DE
+distToObj:outDegree_DE rdf:type owl:NamedIndividual ,
 							DINEN61360:Data_Element ;
-					DINEN61360:has_Instance_Description DistToObj:Get-Distance-To-Nearest-Object_Out_Degree_ID ;
-					DINEN61360:has_Type_Description DistToObj:Degree_TD .
+					DINEN61360:has_Instance_Description distToObj:outDegree_ID ;
+					DINEN61360:has_Type_Description distToObj:degree_TD .
 					
 
-###  http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Degree_ID
-DistToObj:Get-Distance-To-Nearest-Object_Out_Degree_ID rdf:type owl:NamedIndividual ,
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDegree_ID
+distToObj:outDegree_ID rdf:type owl:NamedIndividual ,
 							DINEN61360:Instance_Description ,
 							openmath:Variable ,
 							DINEN61360:Real ;
-					openmath:name "http://www.hsu-hh.de/aut/ontologies/neobotix-mmo-700/get-distance-to-nearest-object#Get-Distance-To-Nearest-Object_Out_Degree_ID" ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getDistanceToNearestObject/outDegree_ID" ;
 					DINEN61360:Expression_Goal "Assurance" ;
 					DINEN61360:Logic_Interpretation "=" .
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability distToObj:getDistanceToNearestObject .
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
