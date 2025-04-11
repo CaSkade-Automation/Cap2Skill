@@ -61,23 +61,26 @@ class MoveForwardSkill(ROS2Skill):
             self.desired_time = self.desired_distance / desired_velocity
 
         self.velocity_cmd.linear.x = desired_velocity
-        self.velocity_publisher.publish(self.velocity_cmd)
-        self.node.get_logger().info(f'Publishing velocity: {self.velocity_cmd.linear.x}')
+        end_time = self.start_time + self.desired_time
 
-        time.sleep(self.desired_time)
+        while time.time() < end_time:
+            self.velocity_publisher.publish(self.velocity_cmd)
+            self.node.get_logger().info(f"Publishing velocity: {self.velocity_cmd.linear.x}")
+            time.sleep(0.1)
+
         self.velocity_cmd.linear.x = 0.0
         self.velocity_publisher.publish(self.velocity_cmd)
-
-    def odom_listener_callback(self, msg: Odometry) -> None:
-        self.velocity_robot = msg.twist.twist
-        self.traveled_distance += self.velocity_robot.linear.x * (time.time() - self.start_time)
-        self.start_time = time.time()
-        self.received_odom = True
 
     @completing
     def completing(self) -> None:
         self.node.get_logger().info(f"MoveForwardSkill is completing with velocity: {self.velocity_robot.linear.x}")
         self.node.get_logger().info(f"Traveled distance: {self.traveled_distance}, Elapsed time: {self.get_elapsed_time()}")
+
+    def odom_listener_callback(self, msg: Odometry) -> None:
+        self.velocity_robot = msg.twist.twist
+        self.traveled_distance += self.velocity_robot.linear.x * 0.1  # Assuming callback is called every 0.1 seconds
+        self.received_odom = True
+        self.node.get_logger().info(f'Received velocity: {self.velocity_robot.linear.x}')
 
     @stopping
     def stopping(self) -> None:
