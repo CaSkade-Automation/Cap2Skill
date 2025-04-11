@@ -10,7 +10,7 @@
             },
             {
                 "name": "execute", 
-                "action": "Move the robot randomly around the area of a desired length x and y based on the mobile robot's position in order to travel and map it completely. If the robot encounters an obstacle, turn the robot and try to move on. Once the entire area has been traveled, store the map as output."
+                "action": "Move the robot in a suitable pattern around the area of a desired length x and y based on the mobile robot's position in order to travel and map it completely. If the robot encounters an obstacle, turn the robot and try to move on. Once the entire area has been traveled, store the map as output."
             },
             {
                 "name": "stopping", 
