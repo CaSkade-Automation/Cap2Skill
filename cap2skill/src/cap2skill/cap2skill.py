@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import List
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
@@ -11,7 +12,8 @@ from prompt_handling.prompt_handling import PromptHandler, PromptType
 class Cap2Skill:
     """ Class for processing prompts and communicating with LLM. """
 
-    def __init__(self, language: str, capability: str, context_organizer: ControlReportHandling, prompt_handler: PromptHandler):
+    def __init__(self, language: str, capability: str, context_organizer: ControlReportHandling, prompt_handler: PromptHandler, skill: str):
+        self.logger = logging.getLogger(__name__.split(".")[-1])
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
         self.context_organizer = context_organizer
         self.language = language
@@ -19,6 +21,7 @@ class Cap2Skill:
         self.capability_ont = self.read_ontology(capability)
         self.prompt_handler = prompt_handler
         self.vector_store = None
+        self.skill_json = json.loads(skill)
 
     def read_ontology(self, ontology: str) -> Graph:
         """ Read the capability ontology. """
@@ -62,6 +65,7 @@ class Cap2Skill:
         #TODO: optimize the number of retrieved contexts
         retrieved_contexts = self.vector_store.similarity_search(query, 4) 
         retrieved_control_entities = self.context_organizer.compare_control_entity_descriptions([retrieved_context.page_content for retrieved_context in retrieved_contexts])
+        self.logger.info(f"Retrieved following control entities: {[retrieved_control_entity.to_dict(include=["name"]) for retrieved_control_entity in retrieved_control_entities]}")
 
         return retrieved_control_entities
 
@@ -71,7 +75,7 @@ class Cap2Skill:
         chunk_documents = self.generate_chunks_from_context()
         self.set_vector_store(chunk_documents)
         retrieved_control_entities = self.retrieve_relevant_context()
-        skill = self.prompt_handler.prompt(PromptType.SKILL_GENERATION, {"language": self.language, "framework": self.context_organizer.get_framework(), "resource_type": self.context_organizer.get_resource_type(), "capability": self.capability, "control_entities": [retrieved_control_entity.to_dict(include=["name", "type", "description"]) for retrieved_control_entity in retrieved_control_entities]})
+        skill = self.prompt_handler.prompt(PromptType.SKILL_GENERATION, {"language": self.language, "framework": self.context_organizer.get_framework(), "resource_type": self.context_organizer.get_resource_type(), "capability": self.capability_str, "control_entities": [retrieved_control_entity.to_dict(include=["name", "type"]) for retrieved_control_entity in retrieved_control_entities], "skill": json.dumps(self.skill_json, indent=4)})
         return skill
     
 if __name__ == "__main__":
@@ -79,8 +83,8 @@ if __name__ == "__main__":
     from prompt_handling.prompt_handling import load_file
     from report_handling.ros2_handling import ROS2ReportHandling
 
-    context_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../docs", "ros2_system_report_with_descriptions.json") # important: for testing only use of system reports with descriptions otherwise prompting is done for descriptions
-    ontology_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../../capability-models", "set-velocity.ttl")
+    context_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../../results/api-documentation", "ros2_system_report_nav_moveit_with_descriptions.json") # important: for testing only use of system reports with descriptions otherwise prompting is done for descriptions
+    ontology_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../../capability-models", "move-to-point.ttl")
     context = load_file(context_path)
     ontology = load_file(ontology_path)
 
@@ -95,4 +99,4 @@ if __name__ == "__main__":
     
     file_name = "ros2_retrieved_context.txt"
     with open(file_name, "w") as file:
-        json.dump([retrieved_control_entity.to_dict() for retrieved_control_entity in retrieved_control_entities], file, indent=4)
+        json.dump([retrieved_control_entity.to_dict(include=["name", "type"]) for retrieved_control_entity in retrieved_control_entities], file, indent=4)
