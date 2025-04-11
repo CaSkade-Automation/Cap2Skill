@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.messages import BaseMessage
+from langchain_openai import ChatOpenAI
 from typing import Dict
 
 def load_file(file_path): 
@@ -62,7 +63,7 @@ class PromptHandler():
             os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter OpenAI API key: ")
 
         self.logger.info("Loaded OpenAI API key.")
-        self.llm = init_chat_model('gpt-4o', model_provider='openai', temperature=0)
+        self.llm = init_chat_model('gpt-4o', model_provider='openai', temperature=0, top_p=1, top_k=0, freq_penalty=0, presence_penalty=0,)
         self.logger.info("Loaded LLM model: gpt-4o")
 
     def generate_prompt_templates(self) -> Dict[PromptType, ChatPromptTemplate]:
