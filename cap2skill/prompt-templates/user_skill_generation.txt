@@ -1,10 +1,829 @@
---- Instruction ---
-Create an executable ${framework} implementation in ${language} for the following input capability. 
+--- Input Data ---
+Capability: 
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix openmath: <http://openmath.org/vocab/math#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
+@prefix setVel: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
 
---- Context ---
-${control_entities}
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/setVelocity> rdf:type owl:Ontology ;
+                                                                     owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/velocity_TD
+setVel:velocity_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m/s" ;
+					DINEN61360:Definition "This type specifies the velocity of any mobile resource in meters per second." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/setVelocity
+setVel:setVelocity rdf:type owl:NamedIndividual ,
+							VDI3682:ProcessOperator ,
+							CaSk:ProvidedCapability ;
+					VDI3682:hasInput setVel:inVelocity ;
+					VDI3682:hasOutput setVel:outVelocity ;
+					CSS:isRestrictedBy setVel:constraintVelocity ;
+					CSS:requiresCapability setVel:setVelocity ;
+					rdfs:comment "I am a set-velocity capability that sets the mobile robot's velocity in the forward direction to a desired velocity" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/constraintVelocity
+setVel:constraintVelocity rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (setVel:inVelocity_ID setVel:outVelocity_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references setVel:inVelocity_ID ,
+                                                      setVel:outVelocity_ID .
+													  
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/inVelocity
+setVel:inVelocity rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					DINEN61360:has_Data_Element setVel:inVelocity_DE ;
+					VDI3682:isCharacterizedBy setVel:inVelocity_ID .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/inVelocity_DE
+setVel:inVelocity_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description setVel:inVelocity_ID ,
+							setVel:inVelocity_ID_Req ; 
+					DINEN61360:has_Type_Description setVel:velocity_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/inVelocity_ID
+setVel:inVelocity_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/inVelocity_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+			
+			
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/inVelocity_ID_Req
+setVel:inVelocity_ID_Req rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							DINEN61360:Real ;
+					DINEN61360:Logic_Interpretation "<=" ;
+					DINEN61360:Expression_Goal "Requirement" ;
+					DINEN61360:Value 0.8 .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/outVelocity
+setVel:outVelocity rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					VDI3682:isCharacterizedBy setVel:outVelocity_ID .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/outVelocity_ID
+setVel:outVelocity_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/outVelocity_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .							
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability setVel:setVelocity ;
+					DINEN61360:has_Data_Element :velocity_DE ;
+					VDI3682:isCharacterizedBy :velocity_ID .
+					
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocity_DE
+:velocity_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description :velocity_ID ,
+							setVel:outVelocity_ID ;
+                     DINEN61360:has_Type_Description setVel:velocity_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocity_ID
+:velocity_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/velocity_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+
+Skill:
+{{
+    "skill": {{
+        "name": "set_velocity",
+        "description": "Set the velocity of the mobile robot in the forward direction.", 
+        "skill_interface": "REST",
+        "states": [
+            {{
+                "name": "starting", 
+                "action": "Prepare the system to begin setting the velocity of the robot."
+            }},
+            {{
+                "name": "execute", 
+                "action": "Set the velocity of the robot to the desired value if it does not exceed the maximum possible velocity."
+            }},
+            {{
+                "name": "completing",
+                "action": "Print the current velocity of the robot."
+            }}, 
+            {{
+                "name": "stopping", 
+                "action": "Set the velocity of the robot to zero."
+            }}, 
+            {{
+                "name": "resetting", 
+                "action": "Shut down processes used to set the robot's velocity."
+            }}
+        ]
+    }}
+}}
+
+--- Output --- 
+import time
+from pyskillup.decorators.decorators import *
+from pyskillup.decorator_check.decorator_check import ROS2Skill
+from pyskillup.decorators.skill_interface import SkillInterface
+from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
+
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/setVelocity/setVelocity", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/setVelocity/setVelocity", description = "Set the velocity of the mobile robot in the forward direction.")
+class SetVelocitySkill(ROS2Skill): 
+
+    MAX_VELOCITY = 0.8
+
+    def __init__(self):
+        super().__init__('set_velocity')
+
+        self.velocity_publisher = None
+        self.velocity_cmd = Twist()
+        self.velocity_robot = Twist()
+        self.odom_subscription = None
+        self.received_odom = False
+
+    @skill_parameter(is_required=True, name="desired_velocity", description="The desired velocity of the robot.")
+    def get_desired_velocity(self) -> float:
+        return self.velocity_cmd.linear.x
+    
+    @skill_output(is_required=True, name="output_velocity", description="The current velocity of the robot.")
+    def get_output_velocity(self) -> float:
+        return self.velocity_robot.linear.x
+
+    @starting
+    def starting(self) -> None:
+        self.node.get_logger().info("SetVelocitySkill is starting with creating a publisher to cmd_vel topic")
+        self.velocity_publisher = self.node.create_publisher(Twist, 'cmd_vel', 10)
+
+    @execute
+    def execute(self) -> None: 
+        if self.velocity_cmd.linear.x > self.MAX_VELOCITY:
+            self.node.get_logger().warn(f"Desired velocity {{self.velocity_cmd.linear.x}} exceeds the maximum of {{self.MAX_VELOCITY}}. Limitation is applied.")
+            self.velocity_cmd.linear.x = self.MAX_VELOCITY
+
+        self.velocity_publisher.publish(self.velocity_cmd)
+        self.node.get_logger().info(f'Publishing velocity: {{self.velocity_cmd.linear.x}}')
+
+    @completing
+    def completing(self) -> None:
+        self.node.get_logger().info("SetVelocitySkill is completing")
+        self.odom_subscription = self.node.create_subscription(Odometry, "odom", self.odom_listener_callback, 10)
+        while not self.received_odom:
+            self.node.get_logger().info("Waiting for odometry data...")
+            time.sleep(0.1)
+        
+        self.node.get_logger().info(f'Completing SetVelocitySkill with velocity: {{self.velocity_robot.linear.x}}')
+
+    def odom_listener_callback(self, msg: Odometry) -> None: 
+        self.velocity_robot = msg.twist.twist
+        self.received_odom = True
+        self.node.get_logger().info(f'Received velocity: {{self.velocity_robot.linear.x}}')
+
+    @stopping
+    def stopping(self) -> None:
+        self.node.get_logger().info("SetVelocitySkill is stopping")
+        self.velocity_cmd.linear.x = 0.0
+        self.velocity_publisher.publish(self.velocity_cmd)
+        self.node.get_logger().info(f'Stopping robot by publishing velocity: {{self.velocity_cmd.linear.x}}')
+
+    @resetting
+    def resetting(self) -> None:
+        self.node.get_logger().info("SetVelocitySkill is resetting")
+        self.velocity_publisher.destroy()
+        self.odom_subscription.destroy()
+        self.received_odom = False
 
 --- Input Data ---
+Capability: 
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix openmath: <http://openmath.org/vocab/math#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
+@prefix getPosition: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
+
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition> rdf:type owl:Ontology ;
+                                                                     owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/positionX_TD
+getPosition:positionX_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/positionY_TD
+getPosition:positionY_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the y coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/getPosition
+getPosition:getPosition rdf:type owl:NamedIndividual ,
+							VDI3682:ProcessOperator ,
+							CaSk:ProvidedCapability ;
+					VDI3682:hasOutput getPosition:outPosition ;
+					CSS:isRestrictedBy getPosition:constraintX ,
+							getPosition:constraintY ;
+					CSS:requiresCapability getPosition:getPosition ;
+					rdfs:comment "I am a get-position capability that retrieves the mobile robot's position in x and y coordinates." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/constraintX
+getPosition:constraintX rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (:positionX_ID getPosition:outPositionX_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references :positionX_ID ,
+                                                      getPosition:outPositionX_ID .
+			
+			
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/constraintY
+getPosition:constraintY rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (:positionY_ID getPosition:outPositionY_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references :positionY_ID ,
+                                                      getPosition:outPositionY_ID .
+													  
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPosition
+getPosition:outPosition rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					VDI3682:isCharacterizedBy getPosition:outPositionX_ID ,
+							getPosition:outPositionY_ID .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionX_ID
+getPosition:outPositionX_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionX_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionY_ID
+getPosition:outPositionY_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/outPositionY_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .					
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability getPosition:getPosition ;
+					DINEN61360:has_Data_Element :positionX_DE ,
+							:positionY_DE ;
+					VDI3682:isCharacterizedBy :positionX_ID ,
+							:positionY_ID .
+					
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_DE
+:positionX_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description :positionX_ID ,
+							getPosition:outPositionX_ID ;
+                     DINEN61360:has_Type_Description getPosition:positionX_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID
+:positionX_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+					 
+					 
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_DE
+:positionY_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description :positionY_ID ,
+							getPosition:outPositionY_ID ;
+                     DINEN61360:has_Type_Description getPosition:positionY_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID
+:positionY_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+
+
+Skill:
+{{
+    "skill": {{
+        "name": "get_position",
+        "description": "Retrieve the current position of the mobile robot.", 
+        "skill_interface": "REST",
+        "states": [
+            {{
+                "name": "starting", 
+                "action": "Prepare the system to begin receiving current robot position data."
+            }},
+            {{
+                "name": "execute", 
+                "action": "Retrieve the current position of the robot and store it as output."
+            }},
+            {{
+                "name": "completing",
+                "action": "Print the retrieved position data."
+            }},
+            {{
+                "name": "resetting", 
+                "action": "Shut down processes used to obtain the robot position."
+            }}
+        ]
+    }}
+}}
+
+--- Output --- 
+import time
+from pyskillup.decorators.decorators import *
+from pyskillup.decorator_check.decorator_check import ROS2Skill
+from pyskillup.decorators.skill_interface import SkillInterface
+from geometry_msgs.msg import Point
+from nav_msgs.msg import Odometry
+
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/getPosition/getPosition", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/getPosition/getPosition", description = "Retrieve the current position of the mobile robot.")
+class GetPositionSkill(ROS2Skill): 
+
+    def __init__(self):
+        super().__init__('get_position')
+
+        self.position = Point()
+        self.odom_subscription = None
+        self.received_odom = False
+
+    @skill_output(is_required=True, name="position_x", description="The x coordinate of the robot's position.")
+    def get_position_x(self) -> float:
+        return self.position.x
+    
+    @skill_output(is_required=True, name="position_y", description="The y coordinate of the robot's position.")
+    def get_position_y(self) -> float:
+        return self.position.y
+
+    @starting
+    def starting(self) -> None:
+        self.node.get_logger().info("GetPositionSkill is starting...")
+
+    @execute
+    def execute(self) -> None: 
+        self.node.get_logger().info("GetPositionSkill is executing with subscription to odometry data.")
+        self.odom_subscription = self.node.create_subscription(Odometry, "odom", self.odom_listener_callback, 10)
+        while not self.received_odom:
+            self.node.get_logger().info("Waiting for odometry data...")
+            time.sleep(0.1)
+
+    def odom_listener_callback(self, msg: Odometry) -> None: 
+        self.position = msg.pose.pose.position
+        self.node.get_logger().info(f'Received Position: x={{self.position.x}}, y={{self.position.y}}')
+        self.received_odom = True
+
+    @completing
+    def completing(self) -> None:
+        self.node.get_logger().info(f"GetPositionSkill is completing with position: x={{self.position.x}}, y={{self.position.y}}")
+
+    @resetting
+    def resetting(self) -> None:
+        self.node.get_logger().info("GetPositionSkill is resetting")
+        self.node.destroy_subscription(self.odom_subscription)
+        self.received_odom = False
+
+--- Input Data ---
+Capability: 
+@prefix : <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix CaSk: <http://www.w3id.org/hsu-aut/cask#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix openmath: <http://openmath.org/vocab/math#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.w3id.org/hsu-aut/DINEN61360#> .
+@prefix navToPoint: <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/nagivateToPoint/> .
+@base <http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/> .
+
+<http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/nagivateToPoint> rdf:type owl:Ontology ;
+                                                                     owl:imports <http://www.w3id.org/hsu-aut/cask/2.5.4> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/positionX_TD
+navToPoint:positionX_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the x coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/positionY_TD
+navToPoint:positionY_TD rdf:type owl:NamedIndividual ,
+							DINEN61360:Type_Description ;
+					DINEN61360:Unit_of_Measure "m" ;
+					DINEN61360:Definition "This type specifies the estimated position of an object in a given coordinate system of the y coordinate in meters." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/navigateToPoint
+navToPoint:navigateToPoint rdf:type owl:NamedIndividual ,
+							VDI3682:ProcessOperator ,
+							CaSk:ProvidedCapability ;
+					VDI3682:hasInput navToPoint:inPosition ;		
+					VDI3682:hasOutput navToPoint:outPosition ;
+					CSS:isRestrictedBy navToPoint:constraintX ,
+							navToPoint:constraintY ;
+					CSS:requiresCapability navToPoint:navigateToPoint ;
+					rdfs:comment "I am a nagivate-to-point capability that navigates the mobile robot to a desired goal point with specified x and y coordinate." .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/constraintX
+navToPoint:constraintX rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (navToPoint:inPositionX_ID navToPoint:outPositionX_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references navToPoint:inPositionX_ID ,
+                                                      navToPoint:outPositionX_ID .
+			
+			
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/constraintY
+navToPoint:constraintY rdf:type owl:NamedIndividual ,
+                                                openmath:Application ,
+                                                CSS:CapabilityConstraint ;
+                                       openmath:arguments (navToPoint:inPositionY_ID navToPoint:outPositionY_ID) ;
+                                       openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                       CSS:references navToPoint:inPositionY_ID ,
+                                                      navToPoint:outPositionY_ID .
+													  
+													  
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPosition
+navToPoint:inPosition rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					DINEN61360:has_Data_Element navToPoint:inPositionX_DE ,
+							navToPoint:inPositionY_DE ;
+					VDI3682:isCharacterizedBy navToPoint:inPositionX_ID ,
+							navToPoint:inPositionY_ID .
+							
+							
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionX_DE
+navToPoint:inPositionX_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description navToPoint:inPositionX_ID ;
+					DINEN61360:has_Type_Description navToPoint:positionX_TD .
+					
+					
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionX_ID
+navToPoint:inPositionX_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionX_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+					
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionY_DE
+navToPoint:inPositionY_DE rdf:type owl:NamedIndividual ,
+							DINEN61360:Data_Element ;
+					DINEN61360:has_Instance_Description navToPoint:inPositionY_ID ;
+					DINEN61360:has_Type_Description navToPoint:positionY_TD .
+					
+					
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionY_ID
+navToPoint:inPositionY_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/inPositionY_ID" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/outPosition
+navToPoint:outPosition rdf:type owl:NamedIndividual ,
+							VDI3682:Information ;
+					VDI3682:isCharacterizedBy navToPoint:outPositionX_ID ,
+							navToPoint:outPositionY_ID .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/outPositionX_ID
+navToPoint:outPositionX_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/outPositionX_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/outPositionY_ID
+navToPoint:outPositionY_ID rdf:type owl:NamedIndividual ,
+							DINEN61360:Instance_Description ,
+							openmath:Variable ,
+							DINEN61360:Real ;
+					openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/outPositionY_ID" ;
+					DINEN61360:Expression_Goal "Assurance" ;
+					DINEN61360:Logic_Interpretation "=" .					
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700
+:neobotixMMO700 rdf:type owl:NamedIndividual ,
+							CSS:Resource ;
+					CSS:providesCapability navToPoint:navigateToPoint ;
+					DINEN61360:has_Data_Element :positionX_DE ,
+							:positionY_DE ;
+					VDI3682:isCharacterizedBy :positionX_ID ,
+							:positionY_ID .
+					
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_DE
+:positionX_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description :positionX_ID ,
+							navToPoint:outPositionX_ID ;
+                     DINEN61360:has_Type_Description navToPoint:positionX_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID
+:positionX_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionX_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+					 
+					 
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_DE
+:positionY_DE rdf:type owl:NamedIndividual ,
+                             DINEN61360:Data_Element ;
+                     DINEN61360:has_Instance_Description :positionY_ID ,
+							navToPoint:outPositionY_ID ;
+                     DINEN61360:has_Type_Description navToPoint:positionY_TD .
+
+
+###  http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID
+:positionY_ID rdf:type owl:NamedIndividual ,
+                              openmath:Variable ,
+                              DINEN61360:Instance_Description ,
+                              DINEN61360:Real ;
+                     openmath:name "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/positionY_ID" ;
+                     DINEN61360:Expression_Goal "Actual_Value" ;
+                     DINEN61360:Logic_Interpretation "=" .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+
+
+Skill:
+{{
+    "skill": {{
+        "name": "navigate_to_point",
+        "description": "Navigate mobile robot to a desired goal point.", 
+        "skill_interface": "REST",
+        "states": [
+            {{
+                "name": "starting", 
+                "action": "Prepare the system to begin navigating the robot."
+            }},
+            {{
+                "name": "execute", 
+                "action": "Set the desired goal point and navigate the robot to this point. If the goal is not possible, fire transition abort."
+            }},
+            {{
+                "name": "completing",
+                "action": "Print the reached goal position."
+            }}, 
+            {{
+                "name": "stopping", 
+                "action": "Cancel the navigation. If the cancel is not possible, fire transition abort."
+            }}, 
+            {{
+                "name": "aborting", 
+                "action": "Set the velocity of the robot to zero in all directions."
+            }},
+            {{
+                "name": "resetting", 
+                "action": "Shut down processes used to navigate the robot."
+            }}
+        ]
+    }}
+}}
+
+--- Output --- 
+import time
+from pyskillup.decorators.decorators import *
+from pyskillup.decorator_check.decorator_check import ROS2Skill
+from pyskillup.decorators.skill_interface import SkillInterface
+from rclpy.action import ActionClient
+from nav2_msgs.action import NavigateToPose
+from geometry_msgs.msg import Point
+from geometry_msgs.msg import Twist
+
+@skill(skill_interface = SkillInterface.REST, skill_iri="http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/skills/navigateToPoint/navigateToPoint", module_iri= "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/neobotixMMO700", capability_iri = "http://www.hsu-hh.de/aut/ontologies/mobile-robots/neobotix/mmo700/capabilities/navigateToPoint/navigateToPoint", description = "Navigate mobile robot to a desired goal point.")
+class NavigateToPointSkill(ROS2Skill):
+    def __init__(self):
+        super().__init__("navigate_to_point")
+
+        self.goal_position = Point()
+        self.robot_position = Point()
+        self._action_client = None
+        self.goal_handle = None
+        self.goal_reached = False
+        self.goal_rejected = False
+        self.goal_failed = False
+        self.cancel_success = False
+        self.cancel_failed = False
+
+    @skill_parameter(is_required=True, name="goal_position_x", description="The x coordinate of the goal position.")
+    def get_goal_position_x(self) -> float:
+        return self.goal_position.x
+    
+    @skill_parameter(is_required=True, name="goal_position_y", description="The y coordinate of the goal position.")
+    def get_goal_position_y(self) -> float:
+        return self.goal_position.y
+    
+    @skill_output(is_required=True, name="robot_position_x", description="Indicates if the x coordinate of the goal was reached successfully.")
+    def get_robot_position_x(self) -> float:
+        return self.robot_position.x
+    
+    @skill_output(is_required=True, name="robot_position_y", description="Indicates if the y coordinate of the goal was reached successfully.")
+    def get_robot_position_y(self) -> float:
+        return self.robot_position.y
+    
+    @starting
+    def starting(self) -> None:
+        self.node.get_logger().info("NavigateToPointSkill is starting with creating an action client to navigate_to_pose action server")
+        self._action_client = ActionClient(self.node, NavigateToPose, "navigate_to_pose")
+
+    @execute
+    def execute(self) -> None:
+        goal_msg = NavigateToPose.Goal()
+        goal_msg.pose.header.frame_id = "map"
+        goal_msg.pose.pose.position.x = self.goal_position.x
+        goal_msg.pose.pose.position.y = self.goal_position.y
+        goal_msg.pose.pose.position.z = 0.0
+        self._action_client.wait_for_server()
+
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+        while not self.goal_reached or not self.goal_rejected or not self.goal_failed:
+            self.node.get_logger().info("Waiting for goal to be reached...")
+            time.sleep(1)
+        
+        if self.goal_rejected:
+            self.node.get_logger().info("Goal was rejected.")
+            self.state_machine.abort()
+        elif self.goal_failed:
+            self.node.get_logger().info("Goal failed.")
+            self.state_machine.abort()
+
+    def feedback_callback(self, feedback_msg):
+        feedback = feedback_msg.feedback
+        self.node.get_logger().info('Feedback: Remaining distance: {{0}}'.format(feedback.distance_remaining))
+
+    def goal_response_callback(self, future):
+        self.goal_handle = future.result()
+
+        if not self.goal_handle.accepted:
+            self.node.get_logger().info('Goal rejected :(')
+            self.goal_rejected = True
+            return
+        
+        self.node.get_logger().info('Goal accepted :)')
+
+        self._get_result_future = self.goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        result = future.result().result
+
+        if result: 
+            self.node.get_logger().info('Goal reached successfully!')
+            self.goal_reached = True
+            self.robot_position = self.goal_position
+        else: 
+            self.node.get_logger().info('Failed to reach goal')
+            self.goal_failed = True
+
+    def cancel_done(self, future):
+        cancel_response = future.result()
+        if len(cancel_response.goals_canceling) > 0:
+            self.node.get_logger().info('Goal successfully canceled')
+            self.cancel_success = True
+        else:
+            self.node.get_logger().info('Goal failed to cancel')
+            self.cancel_failed = True
+
+    @completing
+    def completing(self) -> None:
+        self.node.get_logger().info(f"NavigateToPointSkill is completing with position: x={{self.robot_position.x}}, y={{self.robot_position.y}}")
+
+    @stopping
+    def stopping(self) -> None:
+        self.node.get_logger().info("NavigateToPointSkill is stopping with canceling the goal")
+        future = self.goal_handle.cancel_goal_async()
+        future.add_done_callback(self.cancel_done)
+        while not self.cancel_success or not self.cancel_failed:
+            self.node.get_logger().info("Waiting for goal to be canceled...")
+            time.sleep(1)
+        if self.cancel_failed:
+            self.node.get_logger().info("Goal failed to cancel.")
+            self.state_machine.abort()
+
+    @aborting
+    def aborting(self) -> None:
+        self.node.get_logger().info("NavigateToPointSkill is aborting")
+        velocity_publisher = self.node.create_publisher(Twist, 'cmd_vel', 10)
+        velocity_cmd = Twist()
+        velocity_cmd.linear.x = 0.0
+        velocity_cmd.linear.y = 0.0
+        velocity_cmd.linear.z = 0.0
+        velocity_cmd.angular.x = 0.0
+        velocity_cmd.angular.y = 0.0
+        velocity_cmd.angular.z = 0.0
+        velocity_publisher.publish(velocity_cmd)
+        velocity_publisher.destroy()
+
+    @resetting
+    def resetting(self) -> None:
+        self.node.get_logger().info("NavigateToPointSkill is resetting")
+        self._action_client.destroy()
+        self.goal_reached = False
+        self.goal_rejected = False
+        self.goal_failed = False
+        self.cancel_success = False
+        self.cancel_failed = False
+
+--- Input Data ---
+Capability: 
 ${capability}
+
+Skill:
+${skill}
 
 --- Output --- 
