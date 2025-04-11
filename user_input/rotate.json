@@ -10,7 +10,7 @@
             },
             {
                 "name": "execute", 
-                "action": "Get the actual orientation of the robot and set the angular velocity to the desired value if it does not exceed the maximum possible velocity in order to rotate the robot by the desired number of degrees. The angular velocity is maintained until the desired orientation is reached and then set to zero to stop the mobile robot."
+                "action": "Get the actual orientation of the robot and set the angular velocity to the desired velocity value if it does not exceed the maximum possible velocity in order to rotate the robot by the desired number of degrees. The angular velocity is maintained until the desired orientation is reached and then set to zero to stop the mobile robot."
             },
             {
                 "name": "completing",
