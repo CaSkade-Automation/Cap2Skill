@@ -190,6 +190,7 @@ class SetVelocitySkill(ROS2Skill):
     def starting(self) -> None:
         self.node.get_logger().info("SetVelocitySkill is starting with creating a publisher to cmd_vel topic")
         self.velocity_publisher = self.node.create_publisher(Twist, 'cmd_vel', 10)
+        self.odom_subscription = self.node.create_subscription(Odometry, "odom", self.odom_listener_callback, 10)
 
     @execute
     def execute(self) -> None: 
@@ -197,18 +198,25 @@ class SetVelocitySkill(ROS2Skill):
             self.node.get_logger().warn(f"Desired velocity {{self.velocity_cmd.linear.x}} exceeds the maximum of {{self.MAX_VELOCITY}}. Limitation is applied.")
             self.velocity_cmd.linear.x = self.MAX_VELOCITY
 
-        self.velocity_publisher.publish(self.velocity_cmd)
-        self.node.get_logger().info(f'Publishing velocity: {{self.velocity_cmd.linear.x}}')
+        timeout = time.time() + 3.0 
+        velocity_tolerance = 0.05   
+
+        while time.time() < timeout:
+            self.velocity_publisher.publish(self.velocity_cmd)
+            self.node.get_logger().info(f"Publishing velocity: {{self.velocity_cmd.linear.x}}")
+
+            if abs(self.velocity_robot.linear.x - self.velocity_cmd.linear.x) <= velocity_tolerance:
+                self.node.get_logger().info(f"Desired velocity reached: {{self.velocity_robot.linear.x}}")
+                break
+
+            time.sleep(0.1)
+
+        else:
+            self.node.get_logger().warn(f"Velocity not reached within timeout. Last received: {{self.velocity_robot.linear.x}}")
 
     @completing
     def completing(self) -> None:
-        self.node.get_logger().info("SetVelocitySkill is completing")
-        self.odom_subscription = self.node.create_subscription(Odometry, "odom", self.odom_listener_callback, 10)
-        while not self.received_odom:
-            self.node.get_logger().info("Waiting for odometry data...")
-            time.sleep(0.1)
-        
-        self.node.get_logger().info(f'Completing SetVelocitySkill with velocity: {{self.velocity_robot.linear.x}}')
+        self.node.get_logger().info(f"SetVelocitySkill is completing with velocity: {{self.velocity_robot.linear.x}}")
 
     def odom_listener_callback(self, msg: Odometry) -> None: 
         self.velocity_robot = msg.twist.twist
