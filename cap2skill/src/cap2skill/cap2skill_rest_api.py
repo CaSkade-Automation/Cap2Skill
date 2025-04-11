@@ -60,7 +60,8 @@ async def generate_skill(language: str = Form(...),
                         resource_type: str = Form(...),
                         context_file: UploadFile = File(None),
                         context_name: str = Form(...),
-                        ontology_file: UploadFile = File(...) 
+                        ontology_file: UploadFile = File(...),
+                        skill: str = Form(...),
                         ):
     """
     Endpoint for code generation from an OWL capability ontology.
@@ -88,7 +89,7 @@ async def generate_skill(language: str = Form(...),
     ontology = ontology.decode("utf-8")
 
     # Call code generation via cap2skill
-    cap2skill = Cap2Skill(language, ontology, control_entities_handler[context_name], prompt_handler)
+    cap2skill = Cap2Skill(language, ontology, control_entities_handler[context_name], prompt_handler, skill)
     llm_answer: BaseMessage = cap2skill.generate_skill_code()
 
     return {"skill_code": llm_answer.content}
