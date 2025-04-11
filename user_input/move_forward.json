@@ -10,11 +10,11 @@
             },
             {
                 "name": "execute", 
-                "action": "Set the velocity of the robot to a calculated value for the desired time. If the calculated velocity exceeds the maximum velocity, set the maximum velocity and calculate the new time necessary to travel the desired distance."
+                "action": "Set the velocity of the robot to a calculated value for the desired time only and then reset it. If the calculated velocity exceeds the maximum velocity, set the maximum velocity and calculate the new time necessary to travel the desired distance."
             },
             {
                 "name": "completing",
-                "action": "Print the current velocity of the robot and the traveled distance and time."
+                "action": "Read and print the current velocity of the robot and print the traveled distance and time."
             }, 
             {
                 "name": "stopping", 
