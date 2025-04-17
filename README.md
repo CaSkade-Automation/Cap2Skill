@@ -1,2 +1,2 @@
 # Cap2Skill
-LLM-Based Skill Generation from Capability Ontologies for ROS2
+LLM-Based Skill Generation from Capability Ontologies
